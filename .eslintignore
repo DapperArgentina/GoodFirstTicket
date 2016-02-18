@@ -4,3 +4,4 @@
 **/lib
 **/dist
 webpack.config.js
+client/bundle.*
