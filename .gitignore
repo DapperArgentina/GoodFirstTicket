@@ -28,7 +28,5 @@ dist/
 node_modules/
 bower_components/
 
-webpack.config.js
-
 ##Exclude webpack built files
 client/bundle.*
