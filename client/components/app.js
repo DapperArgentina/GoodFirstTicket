@@ -1,7 +1,6 @@
 const React = require('react');
 const NavBar = require('./NavBar'); 
-
-
+const TicketList = require('./TicketList'); 
 
 const App = (props) => (
   <div className='app-shell'>
