@@ -1,15 +1,7 @@
 # DapperArgentina
 
-
-
-
-
+# Authors
 Megan Ring
-
-
-Vince
-
+Vince Cipriani
 Daniel Kim
-
-
-
+Colin Whitmarsh
