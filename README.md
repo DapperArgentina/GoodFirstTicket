@@ -1,6 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=ready&title=Ready)](https://waffle.io/DapperArgentina/DapperArgentina)
 [![Stories in Ready](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=ready&title=Ready)](https://waffle.io/DapperArgentina/DapperArgentina)
 [![Stories in Ready](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=ready&title=Ready)](https://waffle.io/DapperArgentina/DapperArgentina)
+[![Stories in Ready](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=ready&title=Ready)](https://waffle.io/DapperArgentina/DapperArgentina)
 # DapperArgentina
 
 # Authors
