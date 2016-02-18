@@ -1,6 +1,6 @@
-.eslint*
 **/node_modules
 **/bower_components
 **/lib
 **/dist
 webpack.config.js
+client/bundle.*
