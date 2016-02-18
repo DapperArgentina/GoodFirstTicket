@@ -3,3 +3,4 @@
 **/bower_components
 **/lib
 **/dist
+webpack.config.js
