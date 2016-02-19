@@ -1,23 +1,21 @@
 // Require the request module from node
-var request = require('request');
+var $ = require('jquery');
 
 module.exports = {};
 
 //Create a get request for issues
-module.exports.getIssues = function (callback) {
- var options = {
-   url: 'https://api.github.com/search/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+bug%22&per_page=100',
-   headers: { 'User-Agent': '' },
-   json: true  // will JSON.parse(body) for us
- };
+module.exports.getIssues = function (successCallback, errCallback) {
+  var options = {
+    type: 'GET',
+    success: successCallback,
+    error: errCallback,
+    data: {headers: { 'User-Agent': '' },
+    json: true}  // will JSON.parse(body) for us
+  };
  
- request.get(options, function (err, res, body) {
-   if (err) { 
-     callback(err, null);
-   } else {
-     callback(null, body);
-   }
- });
+  $.ajax('https://api.github.com/search/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+bug%22&per_page=100'
+  , options);
+  
 };
 
 /*
