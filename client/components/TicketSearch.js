@@ -1,6 +1,4 @@
-
 const React = require('react');
-const TicketEntry = require('./TicketEntry');
 
 class TicketSearch extends React.Component {
 
@@ -13,7 +11,9 @@ class TicketSearch extends React.Component {
   }
 
   render () {
-    return <input type="text" value={this.state.searchText} />;
+    return <div className="col-md-10 col-md-offset-1">
+              <input className="form-control" type="text" value={this.state.searchText} placeholder="Search here..." />
+           </div>;
   }
 }
 
