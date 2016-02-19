@@ -4,6 +4,7 @@
   "description": "'awesomeness'",
   "main": "client/app.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client"
