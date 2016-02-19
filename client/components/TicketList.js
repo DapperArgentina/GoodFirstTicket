@@ -1,6 +1,7 @@
 const React = require('react');
 const TicketSearch = require('./TicketSearch');
 const TicketEntry = require('./ticketEntry');
+const TicketSearch = require('./TicketSearch');
 
 
 const GH = require('../../gitHubWorker');
