@@ -13,13 +13,20 @@ class TicketList extends React.Component {
       tickets: []
     };
     
+    this.getIssues = this.getIssues.bind(this);
+    
+    this.getIssues();
+  }
+  
+  getIssues(searchTerm, language){
     //Fetch issues;
     var self = this;
     GH.getIssues(function(data) {
+      console.log(data);
       self.setState({
         tickets: data.items
       });
-    }, console.log);
+    }, console.log, searchTerm, language);
   }
   
   render () {
@@ -29,7 +36,7 @@ class TicketList extends React.Component {
     
     return (
     <div className="main-ticket-view">
-      <TicketSearch />
+      <TicketSearch searchHandler={this.getIssues} />
       <h3>Open Issues</h3>
       <div className="ticket-list">
           {this.state.tickets.map ((ticket, index) => 
