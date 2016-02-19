@@ -3,18 +3,25 @@ var $ = require('jquery');
 
 module.exports = {};
 
-//Create a get request for issues
-module.exports.getIssues = function (successCallback, errCallback) {
+module.exports.getIssues = function (successCallback, errCallback, searchTerm, language) {
   var options = {
+    url: 'https://api.github.com/search/issues',
     type: 'GET',
     success: successCallback,
     error: errCallback,
-    data: {headers: { 'User-Agent': '' },
-    json: true}  // will JSON.parse(body) for us
+    data: {q: 'is:issue is:open label:"good first bug"',
+      per_page: 100}
   };
  
-  $.ajax('https://api.github.com/search/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+bug%22&per_page=100'
-  , options);
+  if(searchTerm) {
+    options.data.q += '+' + searchTerm.trim();  
+  }
+
+  if(language) {
+    options.data.q += 'language:' + language;
+  }
+ 
+  $.ajax(options);
   
 };
 
