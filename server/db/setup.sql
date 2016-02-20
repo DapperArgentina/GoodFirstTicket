@@ -13,8 +13,9 @@ use gitBegin;
 CREATE TABLE issues (
   internal_id int AUTO_INCREMENT PRIMARY KEY,
   id int NOT NULL,
-  ticket_number int,
-  repo_key nvarchar(50), 
+  number int,
+  repo_name nvarchar(50),
+  org_name nvarchar(50), 
   title nvarchar(2000) NOT NULL,
   comments int,
   created_at datetime,
@@ -26,8 +27,8 @@ CREATE TABLE issues (
 CREATE TABLE repos (
   internal_id int AUTO_INCREMENT PRIMARY KEY,
   id int NOT NULL,
-  repo_key nvarchar(50),
   name nvarchar(100),
+  org_name nvarchar(50), 
   language nvarchar(100),
   beginner_tickets int,
   description nvarchar(1000),
