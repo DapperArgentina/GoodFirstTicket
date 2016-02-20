@@ -1,6 +1,7 @@
 const NavEntry = require('./NavEntry');
 const React = require('react');
 
+
 const NavBar = (props) => (
   <div className="navbar-fixed">
     <nav className="cyan lighten-2" role="navigation">
@@ -18,7 +19,7 @@ const NavBar = (props) => (
         <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
       </div>
     </nav>
-  </div>
+</div>
 );
 
 module.exports = NavBar;
