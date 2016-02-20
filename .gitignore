@@ -30,3 +30,5 @@ bower_components/
 
 ##Exclude webpack built files
 client/bundle.*
+
+config.js
