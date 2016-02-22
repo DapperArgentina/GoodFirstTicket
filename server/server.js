@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 var db = require('./db/database');
 var app = express();
 
+var Issues = require('./models/issues');
+Issues = new Issues();
+
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
@@ -19,15 +22,13 @@ app.route('/api')
     res.send('Hello World');
   });
 
-
 app.route('/api/issues')
-  .get(function(req, res){
-    db.raw(`select * from issues`)
-    .then( function (resultsFromSelect) {
-      return resultsFromSelect[0];
-    })
-    .then ( function (results) {
-      res.send(results);
+  .get(function(req, res) {
+    Issues.getIssues()
+    .then((results) => res.send(results))
+    .catch(() => {
+      res.statusCode = 501;
+      res.send('Unknown Server Error');
     });
   });
 
