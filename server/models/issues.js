@@ -15,14 +15,16 @@ Issues.prototype.getIssues = function () {
    hoursSinceLastFetch > 1) {
     return db.raw(`select i.*, r.language 
             from issues i 
-            left join repos r on i.org_name=r.org_name and i.repo_name=r.name `)
+            left join repos r on i.org_name=r.org_name and i.repo_name=r.name
+            limit 200;`)
             .then((results) => {
               this._issues = results[0];
               this._lastUpdateDate = new Date();
               return this._issues;
-            });
+            })
+            .catch(console.log);
   } else {
-    return new Promise(() => this._issues);
+    return new Promise((resolve) => resolve(this._issues));
   }
 };
 

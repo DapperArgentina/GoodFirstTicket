@@ -26,7 +26,8 @@ app.route('/api/issues')
   .get(function(req, res) {
     Issues.getIssues()
     .then((results) => res.send(results))
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.statusCode = 501;
       res.send('Unknown Server Error');
     });
