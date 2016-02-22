@@ -13,4 +13,5 @@ module.exports.reposToUpdate = `select name, org_name, etag
                                 from repos
                                 where datediff(NOW(),data_refreshed_at) > 1 
                                 or data_refreshed_at is null
+                                order by data_refreshed_at asc
                                 limit 20`;
