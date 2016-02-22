@@ -24,7 +24,7 @@ class TicketList extends React.Component {
     GH.getIssues(function(data) {
       console.log(data);
       self.setState({
-        tickets: data.items
+        tickets: data
       });
     }, console.log, searchTerm, language);
   }
@@ -35,10 +35,10 @@ class TicketList extends React.Component {
     // var maxHeight = $(window).height() - $('.navbar').outerHeight() - margin * 2;
     
     return (
-    <div className="main-ticket-view">
+    <div >
       <TicketSearch searchHandler={this.getIssues} />
-      <h3>Open Issues</h3>
-      <div className="ticket-list">
+      <h4>Open Issues</h4>
+      <div className="main-ticket-view">
           {this.state.tickets.map ((ticket, index) => 
             <TicketEntry data={ticket} key={index} />
           )}

@@ -5,12 +5,12 @@ module.exports = {};
 
 module.exports.getIssues = function (successCallback, errCallback, searchTerm, language) {
   var options = {
-    url: 'https://api.github.com/search/issues',
+    url: 'http://45.55.29.22:3000/api/issues',
     type: 'GET',
     success: successCallback,
-    error: errCallback,
-    data: {q: 'is:issue is:open label:"good first bug"',
-      per_page: 100}
+    error: errCallback
+    // data: {q: 'is:issue is:open label:"good first bug"',
+    //   per_page: 100}
   };
  
   if(searchTerm) {
