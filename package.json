@@ -36,6 +36,7 @@
     "knex": "^0.10.0",
     "lodash.pick": "^4.1.0",
     "mysql": "^2.10.2",
+    "parse-link-header": "^0.4.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "request-promise": "^2.0.1",

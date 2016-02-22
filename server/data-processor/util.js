@@ -2,11 +2,17 @@
 const request = require('request-promise');
 const Promise = require('bluebird');
 const db = require('../db/database');
+const parseLink = require('parse-link-header');
 
 /**Searches Github for issues w/ the provided label.
  * Returns a promise which resolves to a a JSON object containing the issues.
  */
-var getGithubIssuesByLabel = function(label) {
+var getGithubIssuesByLabel = function(label, getAllPages) {
+  if (getAllPages === undefined) {
+    getAllPages = true;
+  }
+  
+  var issues = [];
   
   var options = {
     url: 'https://api.github.com/search/issues',
@@ -14,11 +20,55 @@ var getGithubIssuesByLabel = function(label) {
     q: `is:issue is:open label:"${label}"`},
     headers: { 'User-Agent': 'GitBegin App' },
     json: true,  // will JSON.parse(body) for us
+    resolveWithFullResponse: true
   };
  
-  return request.get(options);
+  return request.get(options).then((result) => {
+    issues = result.body.items;
+    var links = parseLink(result.headers.link);
+    if (getAllPages && links.next) {
+      return getAllSubsequentPages(links.next.url)
+      .then((results) => {
+        return issues = issues.concat(results.reduce((memo, resObj) => {
+          return memo.concat(resObj.items);
+        }, []));
+      });  
+    } else {
+      return issues;
+    }
+  });
 };
 
+/**Performas a GET request on the provided URL and if a "next" Link
+ * is provided in the header, it recursively continues calling until all
+ * pages are retrieved
+ */
+var getAllSubsequentPages = function(url) {
+  
+  var data = [];
+  
+  var recursiveGet = function(url) { 
+    var options = {
+      url: url,
+      headers: { 'User-Agent': 'GitBegin App' },
+      json: true,
+      resolveWithFullResponse: true
+    };
+    
+    return request.get(options).then((result) => {
+      data.push(result.body);
+      //Handle pagination and see if we need to iterate pages
+      var links = parseLink(result.headers.link);
+      if(links.next) {
+        return recursiveGet(links.next.url);
+      } else {
+        return data;
+      }
+    });
+  };
+  
+  return recursiveGet(url);
+};
 /**Takes an org name and repo name and fetches information from Github api
  * Optionally, takes an etag.  If provided Github will only send response if there
  * is new data since last update
@@ -29,7 +79,7 @@ var getRepoInformation = function (orgName, repoName, etag) {
     headers: { 'User-Agent': 'GitBegin App',
     'If-None-Match': etag },
     json: true,  // will JSON.parse(body) for us
-    resolveWithFullResponse: true    //  <---  <---  <---  <--- 
+    resolveWithFullResponse: true
   };
  
   return request.get(options);
