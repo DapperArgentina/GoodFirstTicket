@@ -1,7 +1,12 @@
 
-var request = require('request-promise');
+const request = require('request-promise');
+const Promise = require('bluebird');
+const db = require('../db/database');
 
-module.exports.getGithubIssuesByLabel = function(label) {
+/**Searches Github for issues w/ the provided label.
+ * Returns a promise which resolves to a a JSON object containing the issues.
+ */
+var getGithubIssuesByLabel = function(label) {
   
   var options = {
     url: 'https://api.github.com/search/issues',
@@ -18,7 +23,7 @@ module.exports.getGithubIssuesByLabel = function(label) {
  * Optionally, takes an etag.  If provided Github will only send response if there
  * is new data since last update
  */
-module.exports.getRepoInformation = function (orgName, repoName, etag) {
+var getRepoInformation = function (orgName, repoName, etag) {
   var options = {
     url: `https://api.github.com/repos/${orgName}/${repoName}`,
     headers: { 'User-Agent': 'GitBegin App',
@@ -37,7 +42,7 @@ var dateFormat = require('dateformat');
 /**Takes an object that looks like a github API issue obj and converts it
  * to an obj that contains only columns in our db (w/ keys that match db columns)
  */
-module.exports.convertIssueToDbIssue = function(obj) {
+var convertIssueToDbIssue = function(obj) {
   //reduce down to properties we care about
   obj = pick(obj, ['id','title','comments','created_at', 'updated_at', 'html_url', 'assignee','repository_url','number']);
   
@@ -61,7 +66,10 @@ module.exports.convertIssueToDbIssue = function(obj) {
   return obj;
 };
 
-module.exports.convertRepoToDbRepo = function(obj, headers) {
+/**Takes a Github API Repo object and converts it to an object 
+ * that contains the columns we want to insert/update into our database.
+ */
+var convertRepoToDbRepo = function(obj, headers) {
   //reduce down to properties we care about
   obj = pick(obj, ['id','name','language','description','stargazers_count', 
           'watchers_count', 'has_wiki', 'has_pages','open_issues','forks','created_at',
@@ -88,3 +96,43 @@ module.exports.convertRepoToDbRepo = function(obj, headers) {
 };
 
 
+/**Accepts an array of objects ({name: ,org_name, etag:}) and updates our
+ * database w/ new information from the github api.  Returns a promise which
+ * resolves to the number of repos actually updated in the db
+ */
+var refreshReposFromGithub = function(repos) {
+    //Update all repos from API
+  var countUpdates = 0;
+
+  var allRepoGets = repos.map((repo) => {
+    return getRepoInformation(repo.org_name, repo.name, repo.etag)
+    .then((result) => {
+      var objToInsert = convertRepoToDbRepo(result.body, result.headers);
+      return db('repos').where({name: objToInsert.name, org_name: objToInsert.org_name})
+                        .update(objToInsert)
+                        .then(() => countUpdates++);
+    })
+    .catch((result) => {
+      if(result.statusCode === 304) {
+        //Github is telling us there is no change since last time we updated
+        //It determines this based on the etag we provide in the GET request
+      } else {
+        console.error('Error getting new repo information', result);
+      } 
+    });
+  });
+
+  return Promise.all(allRepoGets)
+  .then(() => {
+    console.log(`Updated ${countUpdates} repos`);
+    return countUpdates;
+  });
+};
+
+module.exports = {
+  getGithubIssuesByLabel: getGithubIssuesByLabel,
+  getRepoInformation: getRepoInformation,
+  convertIssueToDbIssue: convertIssueToDbIssue,
+  convertRepoToDbRepo: convertRepoToDbRepo,
+  refreshReposFromGithub: refreshReposFromGithub
+};

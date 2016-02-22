@@ -10,9 +10,6 @@ const beginnerLabels = [
 ];
 
 const sql = require('./sqlQueries');
-
-//TODO
-  //If getIssuesFromGH fails, throw error
   
 //For all beginner labels, get issues
 var issuePromises = beginnerLabels.map((label) =>util.getGithubIssuesByLabel(label));
@@ -40,38 +37,10 @@ var allIssues = Promise.all(issuePromises).then((results) =>{
     console.log('No new repos');
 })
 .then(() => {
+  //Grab the list of repositories that we are going to update.
   return db.raw(sql.reposToUpdate);
 })
-.then((results) => {
-  var repos = results[0];
-  
-  //Update all repos from API
-  var countUpdates = 0;
-  
-  var allRepoGets = repos.map((repo) => {
-    return util.getRepoInformation(repo.org_name, repo.name, repo.etag)
-    .then((result) => {
-      var objToInsert = util.convertRepoToDbRepo(result.body, result.headers);
-      return db('repos').where({name: objToInsert.name, org_name: objToInsert.org_name})
-                        .update(objToInsert)
-                        .then(() => countUpdates++);
-    })
-    .catch((result) => {
-      if(result.statusCode === 304) {
-        //Github is telling us there is no change since last time we updated
-        //It determines this based on the etag we provide in the GET request
-      } else {
-        console.error('Error getting new repo information', result);
-      } 
-    });
-  });
-  
-  Promise.all(allRepoGets)
-  .then(() => {
-    console.log(`Updated ${countUpdates} repos`);
-  });
-  
-})
+.then((results) => util.refreshReposFromGithub(results[0]))
 .catch(console.log);
 
 
