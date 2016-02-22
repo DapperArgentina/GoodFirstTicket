@@ -9,8 +9,8 @@ module.exports.mergeAndUpsertRepos = `insert into repos (org_name, name, record_
           where r.name is null`;
           
           
- module.exports.reposToUpdate = `select name, org_name, etag
-  from repos
-  where datediff(NOW(),data_refreshed_at) > 1 
-  or data_refreshed_at is null
-  limit 5`;
+module.exports.reposToUpdate = `select name, org_name, etag
+                                from repos
+                                where datediff(NOW(),data_refreshed_at) > 1 
+                                or data_refreshed_at is null
+                                limit 5`;

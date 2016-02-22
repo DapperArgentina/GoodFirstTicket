@@ -46,20 +46,3 @@ CREATE TABLE repos (
   record_inserted_at datetime,
   etag nvarchar(50)
 );
-
-/*Below inserts some dummy data for initial testing*/
-insert into issues
-(id, title, comments, created_at, updated_at, html_url, assignee, repo_key)
-values (1, 'Ticket Issue Title #1', 38, NOW(), NOW(), 
-'http://www.google.com', 'vince', 'react');
-
-insert into issues
-(id, title, comments, created_at, updated_at, html_url, assignee)
-values (1, 'Ticket Issue Title #2', 12, NOW(), NOW(), 
-'http://www.facebook.com', 'Colin','.net');
-
-insert into repos
-(id, name, language, beginner_tickets, open_issues)
-values
-(12312, 'React','javascript', 3, 100),
-(54345, '.net','C#', 5, 20);
