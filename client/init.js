@@ -7,7 +7,6 @@ const TicketList = require('./components/TicketList');
 const RepoList = require('./components/RepoList'); 
 const RepoProfile = require('./components/RepoProfile'); 
 
-
 const App = require('./components/app');
 const data = require('./dummyData');
 
@@ -18,8 +17,7 @@ ReactDOM.render((
       <IndexRoute component={TicketList} />
       <Route path='repos' component={RepoList} />
       <Route path='repoProfile' component={RepoProfile} />
-      {
-      // <Route path='repoProfile' component={RepoProfile} />
+      {// <Route path='repos' component={RepoList} />
       // <Route path='resources' component={ResourceList} />
       }
     </Route>
