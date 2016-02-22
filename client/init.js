@@ -7,3 +7,6 @@ const App = require('./components/app');
 const data = require('./dummyData');
 
 ReactDOM.render(<App tickets={data.items}/> , document.getElementById('app'));
+$(document).ready(function() {
+    $('select').material_select();
+});

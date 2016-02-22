@@ -9,7 +9,7 @@ const App = (props) => (
   <div className='app-shell grey lighten-2'>
     <NavBar links={linksList}/>
     <div className="row">
-      <div className="main col-sm-10 container">
+      <div className="container">
         <TicketList issues={props.tickets} />
       </div>
     </div>

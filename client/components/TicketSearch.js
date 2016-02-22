@@ -32,21 +32,25 @@ class TicketSearch extends React.Component {
     });
   }
   render () {
-    return <div className="col-md-10 col-md-offset-1">
-              <input className="form-control" type="text" value={this.state.searchText} 
-                placeholder="Search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
-              <select value={this.state.language} onChange={this.languageHandler}>
-                <option value="Javascript">Javascript</option>
-                <option value="HTML">HTML</option>
-                <option value="C">C</option>
-                <option value="Java">Java</option>
-                <option value="Python">Python</option>
-                <option value="Ruby">Ruby</option>
-                <option value="XSLT">XSLT</option>
-                <option value="TypeScript">TypeScript</option>
-                <option value="C++">C++</option>
-                <option value="PHP">PHP</option>
-              </select>
+    return <div className="row">
+              <div className="input-field col s8">
+                <input type="text" value={this.state.searchText} 
+                  placeholder="Search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
+              </div>
+              <div className="input-field col s2">
+                <select value={this.state.language} onChange={this.languageHandler}>
+                  <option value="Javascript">Javascript</option>
+                  <option value="HTML">HTML</option>
+                  <option value="C">C</option>
+                  <option value="Java">Java</option>
+                  <option value="Python">Python</option>
+                  <option value="Ruby">Ruby</option>
+                  <option value="XSLT">XSLT</option>
+                  <option value="TypeScript">TypeScript</option>
+                  <option value="C++">C++</option>
+                  <option value="PHP">PHP</option>
+                </select>
+              </div>
            </div>;
   }
 }
