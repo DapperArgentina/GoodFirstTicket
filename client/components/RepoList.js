@@ -40,7 +40,7 @@ class RepoList extends React.Component {
       <RepoSearch searchHandler={this.getRepos} />
       <h4>Repositories</h4>
       <div className="main-repo-view">
-        {this.state.tickets.map ((repo, index) => 
+        {this.state.repos.map ((repo, index) => 
           <RepoEntry data={repo} key={index} />
         )}
       </div>
