@@ -151,6 +151,9 @@ var convertRepoToDbRepo = function(obj, headers) {
  * resolves to the number of repos actually updated in the db
  */
 var refreshReposFromGithub = function(repos) {
+  if(!repos) {
+    return 0;
+  }
     //Update all repos from API
   var countUpdates = 0;
 
