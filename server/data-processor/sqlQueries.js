@@ -7,8 +7,7 @@ module.exports.mergeAndUpsertRepos = `insert into repos (org_name, name, record_
             ) distinct_repos
           left join repos r on r.org_name=distinct_repos.org_name and r.name=distinct_repos.repo_name
           where r.name is null`;
-          
-          
+                    
 module.exports.reposToUpdate = `select name, org_name, etag
                                 from repos
                                 where datediff(NOW(),data_refreshed_at) > 1 

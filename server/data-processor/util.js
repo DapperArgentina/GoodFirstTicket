@@ -3,6 +3,20 @@ const request = require('request-promise');
 const Promise = require('bluebird');
 const db = require('../db/database');
 const parseLink = require('parse-link-header');
+const config = require('../config');
+var mergeObj = require('lodash.merge');
+var pick = require('lodash.pick');
+var path = require('path');
+var dateFormat = require('dateformat');
+
+/**Basic gitHub request information that we want to use in almost all API interactions */
+var baseGithubOptions = {
+  json: true, //parses the responses body to automatically be js obj
+  resolveWithFullResponse: true, //provides full reponse and not just body (so we get headers)
+  headers: { 'User-Agent': 'GitBegin App' }, 
+  qs: {client_id: config.githubClientId,
+  client_secret: config.githubSecret}
+};
 
 /**Searches Github for issues w/ the provided label.
  * Returns a promise which resolves to a a JSON object containing the issues.
@@ -17,16 +31,14 @@ var getGithubIssuesByLabel = function(label, getAllPages) {
   var options = {
     url: 'https://api.github.com/search/issues',
     qs: {per_page: 100,
-    q: `is:issue is:open label:"${label}"`},
-    headers: { 'User-Agent': 'GitBegin App' },
-    json: true,  // will JSON.parse(body) for us
-    resolveWithFullResponse: true
-  };
- 
+    q: `is:issue is:open label:"${label}"`}
+  };  
+  mergeObj(options, baseGithubOptions);
+
   return request.get(options).then((result) => {
     issues = result.body.items;
     var links = parseLink(result.headers.link);
-    if (getAllPages && links.next) {
+    if (getAllPages && links && links.next) {
       return getAllSubsequentPages(links.next.url)
       .then((results) => {
         return issues = issues.concat(results.reduce((memo, resObj) => {
@@ -50,11 +62,11 @@ var getAllSubsequentPages = function(url) {
   var recursiveGet = function(url) { 
     var options = {
       url: url,
-      headers: { 'User-Agent': 'GitBegin App' },
-      json: true,
-      resolveWithFullResponse: true
+      json: true, //parses the responses body to automatically be js obj
+      resolveWithFullResponse: true, //provides full reponse and not just body (so we get headers)
+      headers: { 'User-Agent': 'GitBegin App' }
     };
-    
+
     return request.get(options).then((result) => {
       data.push(result.body);
       //Handle pagination and see if we need to iterate pages
@@ -69,6 +81,7 @@ var getAllSubsequentPages = function(url) {
   
   return recursiveGet(url);
 };
+
 /**Takes an org name and repo name and fetches information from Github api
  * Optionally, takes an etag.  If provided Github will only send response if there
  * is new data since last update
@@ -76,18 +89,12 @@ var getAllSubsequentPages = function(url) {
 var getRepoInformation = function (orgName, repoName, etag) {
   var options = {
     url: `https://api.github.com/repos/${orgName}/${repoName}`,
-    headers: { 'User-Agent': 'GitBegin App',
-    'If-None-Match': etag },
-    json: true,  // will JSON.parse(body) for us
-    resolveWithFullResponse: true
+    headers: {'If-None-Match': etag }
   };
- 
+  mergeObj(options, baseGithubOptions);
+  
   return request.get(options);
 };
-
-var pick = require('lodash.pick');
-var path = require('path');
-var dateFormat = require('dateformat');
 
 /**Takes an object that looks like a github API issue obj and converts it
  * to an obj that contains only columns in our db (w/ keys that match db columns)

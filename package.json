@@ -34,6 +34,7 @@
     "express": "^4.13.4",
     "jquery": "^2.2.0",
     "knex": "^0.10.0",
+    "lodash.merge": "^4.3.0",
     "lodash.pick": "^4.1.0",
     "mysql": "^2.10.2",
     "parse-link-header": "^0.4.1",
