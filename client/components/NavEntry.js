@@ -1,8 +1,11 @@
 const React = require('react');
+const Router = require('react-router').Router;
+const Route = require('react-router').Route;
+const Link = require('react-router').Link;
 
 const NavEntry = (props) => (
   <li>
-    <a href='#'>{props.data}</a>
+    <Link to={`/${props.data}`}>{props.data}</Link>
   </li>
 );
 
