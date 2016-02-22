@@ -25,3 +25,6 @@ ReactDOM.render((
   </Router>
 ), document.getElementById('app'))
 
+$(document).ready(function() {
+    $('select').material_select();
+});
