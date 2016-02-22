@@ -26,9 +26,10 @@ CREATE TABLE issues (
 
 CREATE TABLE repos (
   internal_id int AUTO_INCREMENT PRIMARY KEY,
-  id int NOT NULL,
-  name nvarchar(100),
-  org_name nvarchar(50), 
+  id int,
+  name nvarchar(100) not null,
+  org_name nvarchar(50) not null, 
+  html_url nvarchar(255),
   language nvarchar(100),
   beginner_tickets int,
   description nvarchar(1000),
@@ -42,7 +43,8 @@ CREATE TABLE repos (
   updated_at datetime, 
   pushed_at datetime,
   data_refreshed_at datetime,
-  record_inserted_at datetime 
+  record_inserted_at datetime,
+  etag nvarchar(50)
 );
 
 /*Below inserts some dummy data for initial testing*/
