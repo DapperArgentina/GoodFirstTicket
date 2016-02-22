@@ -14,3 +14,10 @@ module.exports.reposToUpdate = `select name, org_name, etag
                                 or data_refreshed_at is null
                                 order by data_refreshed_at asc
                                 limit 20`;
+                                
+module.exports.updateBeginnerTicketCount = `update repos r
+                                            left join (
+                                              select repo_name, org_name, count(*) num_beginner_tickets
+                                              from issues
+                                              group by repo_name, org_name) bc on bc.repo_name=r.name and bc.org_name=r.org_name
+                                            set r.beginner_tickets = coalesce(bc.num_beginner_tickets, 0);`;

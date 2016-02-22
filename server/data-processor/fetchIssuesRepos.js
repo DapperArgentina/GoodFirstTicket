@@ -6,12 +6,12 @@ const db = require('../db/database');
 const sql = require('./sqlQueries');
 
 const beginnerLabels = [
-  'good first bug',
-  'beginner',
-  'easy',
-  'easyfix',
-  'good-first-pr',
-  'good-first-issue'
+  'good first bug'//,
+  // 'beginner',
+  // 'easy',
+  // 'easyfix',
+  // 'good-first-pr',
+  //'good-first-issue'
 ];
  
 var issuePromises = [];
@@ -37,6 +37,8 @@ db('issues').truncate()
     console.log(`Found and inserted ${result[0].affectedRows} new repos.`) :
     console.log('No new repos');
 })
+.then(() =>db.raw(sql.updateBeginnerTicketCount))
+.then(() => console.log('updated beginner ticket counts'))
 .catch(console.log);
 
 
