@@ -6,16 +6,12 @@ const NavList = require('./NavList');
 var linksList = ["tickets", "repos", "resources"];
 
 const App = (props) => (
-  <div className='app-shell'>
-    <NavBar />
+  <div className='app-shell grey lighten-2'>
+    <NavBar links={linksList}/>
     <div className="row">
-      <div className="left-nav col-sm-3">
-        <NavList links={linksList}/>
-      </div>
-      <div className="main col-sm-6">
+      <div className="main col-sm-10 container">
         <TicketList issues={props.tickets} />
       </div>
-      <div className="right col-sm-3"></div>
     </div>
    
   </div>

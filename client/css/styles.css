@@ -1,13 +1,8 @@
-body {
+/*body {
   background-color: #DFDAC8;
   color: #3B5A91;
-}
-/*.ticket-entry {
-   overflow: auto; 
-   max-height: 500px;
-   padding: 15 30 15 30;
-   margin: 0 10 0 10;
-   border-width: 1;
-     background-color: #718B20;
-  border-color: #3B280F;
 }*/
+.main-ticket-view {
+   overflow: auto; 
+   max-height: 100vh;
+}
