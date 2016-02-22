@@ -11,6 +11,7 @@ const RepoProfile = require('./components/RepoProfile');
 const App = require('./components/app');
 const data = require('./dummyData');
 
+
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path='/' component={App}>
@@ -25,6 +26,7 @@ ReactDOM.render((
   </Router>
 ), document.getElementById('app'))
 
+//Makes dropdowns work in materialize. Should run after app has loaded.
 $(document).ready(function() {
-    $('select').material_select();
+  $('select').material_select();
 });
