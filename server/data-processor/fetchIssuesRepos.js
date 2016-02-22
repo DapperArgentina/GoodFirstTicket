@@ -3,13 +3,12 @@
 const Promise = require('bluebird');
 const util = require('./util');
 const db = require('../db/database');
+const sql = require('./sqlQueries');
 
 const beginnerLabels = [
   'good first bug',
   'beginner'
 ];
-
-const sql = require('./sqlQueries');
  
 var issuePromises = [];
 
@@ -27,8 +26,6 @@ db('issues').truncate()
     console.log(`Found and inserted ${result[0].affectedRows} new repos into the db.`) :
     console.log('No new repos');
 })
-.then(() => db.raw(sql.reposToUpdate))
-.then((results) => util.refreshReposFromGithub(results[0]))
 .catch(console.log);
 
 
