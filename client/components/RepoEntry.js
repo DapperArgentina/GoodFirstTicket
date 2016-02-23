@@ -1,5 +1,6 @@
 const React = require('react');
 const Link = require('react-router').Link;
+const TimeAgo = require('../../node_modules/react-timeago/timeago');
 
 const RepoEntry = (props) => (
   <div className="row">
@@ -11,9 +12,10 @@ const RepoEntry = (props) => (
                 <p className="left-align col s12">Description: {props.data.description}</p>
               </div>
               <div className="row">
-                <p className="col s4">Last updated: {props.data.updated_at}</p>
+                <p className="col s4">Last updated: <TimeAgo date={props.data.updated_at} /></p>
                 <p className="col s4">Number of beginner tickets: {props.data.beginner_tickets}</p>
                 <p className="col s4">Number of forks: {props.data.forks}</p>
+                
               </div>
               <div className="row">
                 <p className="left-align col s6">Organization: {props.data.org_name}</p>
