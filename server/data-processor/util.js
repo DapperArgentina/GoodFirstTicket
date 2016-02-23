@@ -10,14 +10,6 @@ var path = require('path');
 var dateFormat = require('dateformat');
 
 var QueueManager = require('./queueManager');
-var getGithubApiLimit = function(obj) {
-  if(obj && obj.headers) {
-    return obj.headers['x-ratelimit-remaining'];  
-  } else {
-    console.log('---------->', obj);
-    return 1;
-  }
-};
 
 var gh = new QueueManager(30);
 
