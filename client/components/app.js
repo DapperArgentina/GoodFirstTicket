@@ -3,7 +3,16 @@ const NavBar = require('./NavBar');
 const TicketList = require('./TicketList'); 
 // const NavList = require('./NavList'); 
 
-var linksList = ["tickets", "repos", "resources"];
+const linksList = [
+  {
+    name: "tickets", url: '/'
+  },
+  {
+    name: "repos", url: '/repos'
+  }, 
+  {
+    name: "resources", url: '/resources'
+  }];
 
 const App = (props) => (
   <div className='app-shell grey lighten-2'>
