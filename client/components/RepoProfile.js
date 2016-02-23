@@ -20,12 +20,38 @@ const data = {
   "pushed_at":"2016-02-20T19:46:56.000Z",
   "data_refreshed_at":"2016-02-22T05:14:34.000Z",
   "record_inserted_at":"2016-02-22T05:14:34.000Z",
-  "etag":"\"5621117469930ec9afd5538762cb0514\""
+  "etag":"\"5621117469930ec9afd5538762cb0514\"",
+  "comments": "Wow, this is wonderful!"
 };
 
-const RepoProfile = (props) => (
+const RepoProfile = () => (
+  <div className="row">
+      <div className="col s12 m10">
+        <div className="card white">
+          <div className="card-content black-text" >
+            <span className="card-title">{data.name}</span>
+              <div className="row">
+                <p className="left-align col s6">Beginner Tickets: {data.beginner_tickets}</p>
+                <p className="left-align col s6">Comments: {data.comments}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+);
+
+// Zombie code
+{
+/*
+<div className="repo-profile">
+    <h1 className="jumbotron" href={data.html_url}>{data.name}</h1>
+    <p>Beginner Tickets: {data.beginner_tickets}</p>
+    <p>Comments: {data.comments}</p>
+  </div>
+
+const RepoProfile = () => (
   <div className="repo-profile">
-    <h1 classname="jumbotron" href={props.repo.html_url}>{props.repo.name}</h1>
+    <h1 className="jumbotron" href={data.html_url}>{data.name}</h1>
     <h4>{props.repo.owner.login}</h4>
     <p>{props.repo.language}</p>
     <p>Issues: {props.repo.open_issues_count}</p>
@@ -34,5 +60,8 @@ const RepoProfile = (props) => (
     <p>{props.repo.description}</p>
   </div>
 );
+*/
+}
+
 
 module.exports = RepoProfile;
