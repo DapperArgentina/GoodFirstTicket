@@ -9,6 +9,18 @@ var pick = require('lodash.pick');
 var path = require('path');
 var dateFormat = require('dateformat');
 
+var QueueManager = require('./queueManager');
+var getGithubApiLimit = function(obj) {
+  if(obj && obj.headers) {
+    return obj.headers['x-ratelimit-remaining'];  
+  } else {
+    console.log('---------->', obj);
+    return 1;
+  }
+};
+
+var gh = new QueueManager(30);
+
 /**Basic gitHub request information that we want to use in almost all API interactions */
 var baseGithubOptions = {
   json: true, //parses the responses body to automatically be js obj
@@ -21,7 +33,7 @@ var baseGithubOptions = {
 /**Searches Github for issues w/ the provided label.
  * Returns a promise which resolves to a a JSON object containing the issues.
  */
-var getGithubIssuesByLabel = function(label, getAllPages) {
+var getGithubIssuesByLabel = gh.createQueuedFunction(function(label, getAllPages) {
   if (getAllPages === undefined) {
     getAllPages = true;
   }
@@ -49,7 +61,7 @@ var getGithubIssuesByLabel = function(label, getAllPages) {
       return issues;
     }
   });
-};
+});
 
 /**Performas a GET request on the provided URL and if a "next" Link
  * is provided in the header, it recursively continues calling until all
@@ -74,11 +86,12 @@ var getAllSubsequentPages = function(url) {
       if(links.next) {
         return recursiveGet(links.next.url);
       } else {
+        data.headers = result.headers;
         return data;
       }
     });
   };
-  
+  recursiveGet = gh.createQueuedFunction(recursiveGet);
   return recursiveGet(url);
 };
 
@@ -86,7 +99,7 @@ var getAllSubsequentPages = function(url) {
  * Optionally, takes an etag.  If provided Github will only send response if there
  * is new data since last update
  */
-var getRepoInformation = function (orgName, repoName, etag) {
+var getRepoInformation = gh.createQueuedFunction(function (orgName, repoName, etag) {
   var options = {
     url: `https://api.github.com/repos/${orgName}/${repoName}`,
     headers: {'If-None-Match': etag }
@@ -94,7 +107,7 @@ var getRepoInformation = function (orgName, repoName, etag) {
   mergeObj(options, baseGithubOptions);
   
   return request.get(options);
-};
+});
 
 /**Takes an object that looks like a github API issue obj and converts it
  * to an obj that contains only columns in our db (w/ keys that match db columns)
@@ -188,6 +201,9 @@ var refreshReposFromGithub = function(repos) {
     return countUpdates;
   });
 };
+
+//Start the queue
+gh.dequeue();
 
 module.exports = {
   getGithubIssuesByLabel: getGithubIssuesByLabel,
