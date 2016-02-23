@@ -24,7 +24,7 @@ ReactDOM.render((
   </Router>
 ), document.getElementById('app'))
 
-//Makes dropdowns work in materialize. Should run after app has loaded.
+//Makes dropdowns work in materialize. Should run after app has loaded. 
 $(document).ready(function() {
   $('select').material_select();
 });
