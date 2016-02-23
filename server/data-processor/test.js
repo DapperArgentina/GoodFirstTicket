@@ -1,3 +1,5 @@
+'use strict';
+
 var util = require('./util');
 var QueueManager = require('./queueManager');
 var request = require('request-promise');
@@ -38,16 +40,16 @@ var getGithubIssuesByLabel = function(label, getAllPages) {
 };
 
 var gh = new QueueManager(30, setLimit);
+var queueFn = gh.createQueuedFunction(getGithubIssuesByLabel);
 
+var a1 = gh.enqueue(getGithubIssuesByLabel,['good-first-pr'])
+var a2 = gh.enqueue(getGithubIssuesByLabel,['dog'])
+var a3 = gh.enqueue(getGithubIssuesByLabel,['easy'])
+var b1 = queueFn('good-first-pr');
+var b2 = queueFn('dog');
+var b3 = queueFn('easy');
 
-var a1 = gh.enqueue(getGithubIssuesByLabel,'good-first-pr')
-
-var a2 = gh.enqueue(getGithubIssuesByLabel,'dog')
-
-var a3 = gh.enqueue(getGithubIssuesByLabel,'easy')
-
-
-Promise.all([a1,a2,a3]).then((results) => {
+Promise.all([a1,a2,a3,b1,b2,b3]).then((results) => {
   results.forEach((res) => console.log(res.body.items.length));
 });
 

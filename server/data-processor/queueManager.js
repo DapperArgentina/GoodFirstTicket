@@ -6,11 +6,11 @@ var QueueManager = function(reqPerMin, functionToManageRemainingRequests) {
   this.functionToManageRemainingRequests = functionToManageRemainingRequests;
 };
 
-QueueManager.prototype.enqueue = function(fn, params) {
+QueueManager.prototype.enqueue = function(fn, argsArray) {
   var self = this;
   return new Promise(function(resolve, reject) {
-    self.queue.push({fn: fn, params: params, resolve: resolve});
-    console.log(self.queue.length);
+    self.queue.push({fn: fn, params: argsArray, resolve: resolve});
+    console.log(fn, argsArray, self.queue.length);
   });
 };
 
@@ -18,7 +18,7 @@ QueueManager.prototype.dequeue = function() {
   var self = this;
   if (this.queue.length > 0 && this.requestsRemaining > 1) {
     var item = this.queue.shift();  
-    item.fn(item.params)
+    item.fn.apply(null, item.params)
       .then((result) => {
         self.updateRequestsRemaining(result);
         item.resolve(result);
@@ -31,10 +31,17 @@ QueueManager.prototype.dequeue = function() {
   } else {
     //We only have 1 request remaining, wait 60sec and call dequeue again. 
     //Our limit should be back by then
-    console.log('Waiting 60 seconds.  Limit reached.');
+    console.log(`Waiting 60 seconds.  ${this.queue.length} items in queue`);
     this.requestsRemaining = this.reqPerMin;
     setTimeout(() => this.dequeue.bind(this), 60000);
   }
+};
+
+QueueManager.prototype.createQueuedFunction = function(fn) {
+  var self = this;
+  return function() {
+    return self.enqueue(fn, Array.prototype.slice.apply(arguments));
+  };
 };
 
 QueueManager.prototype.updateRequestsRemaining = function(result) {
