@@ -40,7 +40,6 @@ QueueManager.prototype.dequeue = function() {
     self.dequeue();
   } else if (this.requestsRemaining > 1) {
     console.log('Nothing in queue.  Waiting 1s.');
-    //We have requests but not items queued.  Wait 100ms an check again
     setTimeout(this.dequeue.bind(this), 1000);
   } else {
     //We are out of requests.  Schedule a wait until the reset.  We add 100ms to make sure

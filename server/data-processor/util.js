@@ -202,9 +202,6 @@ var refreshReposFromGithub = function(repos) {
   });
 };
 
-//Start the queue
-gh.dequeue();
-
 module.exports = {
   getGithubIssuesByLabel: getGithubIssuesByLabel,
   getRepoInformation: getRepoInformation,
