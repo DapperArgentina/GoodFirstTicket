@@ -6,12 +6,12 @@ const db = require('../db/database');
 const sql = require('./sqlQueries');
 
 const beginnerLabels = [
-  'good first bug'//,
-  // 'beginner',
-  // 'easy',
-  // 'easyfix',
-  // 'good-first-pr',
-  //'good-first-issue'
+  'good first bug',
+  'beginner',
+  'easy',
+  'easyfix',
+  'good-first-pr',
+  'good-first-issue'
 ];
  
 var issuePromises = [];
