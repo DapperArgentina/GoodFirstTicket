@@ -46,3 +46,5 @@ CREATE TABLE repos (
   record_inserted_at datetime,
   etag nvarchar(50)
 );
+
+CREATE INDEX OrgRepo ON repos (name,org_name);

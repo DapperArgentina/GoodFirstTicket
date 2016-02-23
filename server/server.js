@@ -4,9 +4,10 @@ var db = require('./db/database');
 var app = express();
 
 var Issues = require('./models/issues');
-var Repos = require('./models/repos');
-
 Issues = new Issues();
+
+var Repos = require('./models/repos');
+Repos = new Repos();
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
@@ -28,7 +29,8 @@ app.route('/api/issues')
   .get(function(req, res) {
     Issues.getIssues()
     .then((results) => res.send(results))
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.statusCode = 501;
       res.send('Unknown Server Error');
     });

@@ -11,7 +11,9 @@
     "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client"
+    "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client",
+    "startForever": "forever start --spinSleepTime 10000 server/server.js",
+    "restartForever": "forever restart server/server.js"
   },
   "repository": {
     "type": "git",
