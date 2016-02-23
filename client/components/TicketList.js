@@ -1,7 +1,6 @@
 const React = require('react');
 const TicketSearch = require('./TicketSearch');
 const TicketEntry = require('./ticketEntry');
-const $ = require('jquery');
 const Issues = require('../js/issues');
 
 class TicketList extends React.Component {
@@ -10,7 +9,6 @@ class TicketList extends React.Component {
     super(props);
     
     this.state = {
-      allTickets: [],
       ticketsToRender: []
     };
     
@@ -22,9 +20,9 @@ class TicketList extends React.Component {
   getIssues(searchTerm, language){
     //Fetch issues;
     var self = this;
+
     Issues.getIssues(function(data) {
       self.setState({
-        allTickets: data,
         ticketsToRender: data.slice(0,199)
       });
     }, console.log, searchTerm, language);

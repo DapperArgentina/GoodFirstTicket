@@ -13,14 +13,23 @@ class TicketSearch extends React.Component {
     
     this.searchHandler = this.searchHandler.bind(this);
     this.languageHandler = this.languageHandler.bind(this);
+    this.languageDropDownClass = 'issue-language-dropdown';
   }
 
-  languageHandler(e) {
+  languageHandler() {
+    //The way this is invoked, we have no access to event details so we grab value usingjquery
+    var newLanguage = this.grabSelectedLanguageVal();
+    this.props.searchHandler(this.state.searchText, newLanguage);
     this.setState({
-      language: e.target.value
-    })
+      language: newLanguage
+    });
   }
-
+  
+  componentDidMount() {
+    // Use Materialize custom select input
+    $(`.${this.languageDropDownClass}`).material_select(this.languageHandler);
+  }
+  
   searchHandler(e) {
     //If it is called by someone pressing enter, we run the searchHandler provided to use
     if (e.charCode === 13 || e.keyCode === 13) {
@@ -31,6 +40,12 @@ class TicketSearch extends React.Component {
       searchText: e.target.value
     });
   }
+  
+  grabSelectedLanguageVal() {
+    var $selected = $(`.${this.languageDropDownClass}`).find('.selected');
+    return $selected[0].innerText.trim();
+  }
+  
   render () {
     return <div className="row">
               <div className="input-field col s8">
@@ -38,7 +53,7 @@ class TicketSearch extends React.Component {
                   placeholder="Search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
               </div>
               <div className="input-field col s2">
-                <select value={this.state.language} onChange={this.languageHandler}>
+                <select className="issue-language-dropdown" value={this.state.language} onChange={this.languageHandler}>
                   <option value="Javascript">Javascript</option>
                   <option value="HTML">HTML</option>
                   <option value="C">C</option>
