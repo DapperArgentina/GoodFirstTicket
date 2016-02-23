@@ -27,6 +27,7 @@ const data = {
 const RepoProfile = () => (
   <div className="row">
       <div className="col s12 m10">
+      <h4>Repo Profile</h4>
         <div className="card white">
           <div className="card-content black-text" >
             <span className="card-title">{data.name}</span>
