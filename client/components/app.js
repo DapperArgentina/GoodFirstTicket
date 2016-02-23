@@ -12,7 +12,11 @@ const linksList = [
   }, 
   {
     name: "resources", url: '/resources'
-  }];
+  },
+  {
+    name: "repoProfile", url: '/repoProfile'
+  }
+  ];
 
 const App = (props) => (
   <div className='app-shell grey lighten-2'>
