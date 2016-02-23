@@ -4,9 +4,10 @@ var db = require('./db/database');
 var app = express();
 
 var Issues = require('./models/issues');
-var Repos = require('./models/repos');
-
 Issues = new Issues();
+
+var Repos = require('./models/repos');
+Repos = new Repos();
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
