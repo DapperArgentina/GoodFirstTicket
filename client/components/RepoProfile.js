@@ -21,7 +21,9 @@ const data = {
   "data_refreshed_at":"2016-02-22T05:14:34.000Z",
   "record_inserted_at":"2016-02-22T05:14:34.000Z",
   "etag":"\"5621117469930ec9afd5538762cb0514\"",
-  "comments": "Wow, this is wonderful!"
+  "comments": "Wow, this is wonderful!",
+  "thumbsUp": 0,
+  "thumbsDown": 0
 };
 
 const RepoProfile = () => (
@@ -30,10 +32,12 @@ const RepoProfile = () => (
       <h4>Repo Profile</h4>
         <div className="card white">
           <div className="card-content black-text" >
-            <span className="card-title">{data.name}</span>
+            <span className=" cyan-text lighten-2 card-title">{data.name}</span>
               <div className="row">
-                <p className="left-align col s6">Beginner Tickets: {data.beginner_tickets}</p>
-                <p className="left-align col s6">Comments: {data.comments}</p>
+                <p className="left-align col s12">Beginner Tickets: {data.beginner_tickets}</p>
+                <p className="left-align col s12">Comments: {data.comments}</p>
+                <span className="right-align col s0 mega-octicon octicon-thumbsup"> {data.thumbsUp}</span>
+                <span className="right-align col s0 mega-octicon octicon-thumbsdown"> {data.thumbsDown}</span>
               </div>
           </div>
         </div>
