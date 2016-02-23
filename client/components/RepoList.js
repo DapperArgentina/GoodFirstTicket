@@ -2,7 +2,7 @@ const React = require('react');
 const RepoSearch = require('./RepoSearch');
 const RepoEntry = require('./RepoEntry');
 const $ = require('jquery');
-const GH = require('../../gitHubWorker');
+const GH = require('../js/gitHubWorker');
 
 class RepoList extends React.Component {
   

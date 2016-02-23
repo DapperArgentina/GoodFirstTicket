@@ -11,7 +11,7 @@ Issues.prototype.getIssues = function () {
   var self = this;
   var hoursSinceLastFetch = new DateDiff(new Date(), this._lastUpdateDate).hours();
   
-  if (this._issues === [] ||
+  if (this._issues.length === 0 ||
    hoursSinceLastFetch > 1) {
     return db.raw(`select i.*, r.language 
             from issues i 
