@@ -48,7 +48,7 @@ class TicketSearch extends React.Component {
   searchHandler(e) {
     //If it is called by someone pressing enter, we run the searchHandler provided to use
     if (e.charCode === 13 || e.keyCode === 13) {
-      this.props.searchHandler(e.target.value, this.state.language);
+      this.props.searchHandler(e.target.value, this.state.currentLanguage);
     }
     //In all cases we update our component state
     this.setState({
