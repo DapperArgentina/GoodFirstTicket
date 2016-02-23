@@ -21,7 +21,7 @@ Repos.prototype.getRepos = function () {
               return this._repos;
             });
   } else {
-    return new Promise((resolve) => resolve(this._issues));
+    return new Promise((resolve) => resolve(this._repos));
   }
 };
 
