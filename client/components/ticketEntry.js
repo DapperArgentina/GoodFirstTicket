@@ -8,7 +8,7 @@ const TicketEntry = (props) => (
             <span className="card-title"><a className="cyan-text lighten-2" href={props.data.html_url} target="_blank">{props.data.title}</a></span>
               <div className="row">
                 <p className="left-align col s6">Repo: <a className="cyan-text lighten-2" href={props.data.repository_url} target="_blank">{props.data.repo_name}</a></p>
-                <p className="right-align col s6">{props.data.language} tbd Language</p>
+                <p className="right-align col s6">{props.data.language}</p>
               </div>
           </div>
         </div>

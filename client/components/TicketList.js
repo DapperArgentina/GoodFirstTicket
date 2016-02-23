@@ -22,7 +22,6 @@ class TicketList extends React.Component {
     //Fetch issues;
     var self = this;
     GH.getIssues(function(data) {
-      console.log(data);
       self.setState({
         tickets: data
       });
