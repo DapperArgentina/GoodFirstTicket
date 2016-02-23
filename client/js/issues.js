@@ -1,9 +1,10 @@
 
-var $ = require('jquery');
+const $ = require('jquery');
 
 module.exports = {};
 
 var issues = [];
+var languages = [];
 
 var getIssuesFromApi = function (successCallback, errCallback) {
   var options = {
@@ -16,9 +17,8 @@ var getIssuesFromApi = function (successCallback, errCallback) {
   $.ajax(options);  
 };
 
-
 module.exports.getIssues = function(successCallback, errCallback, searchTerm, language) {
-  if (issues = []) {
+  if (issues.length === 0) {
     getIssuesFromApi((data) => {
       issues = data;
       if (searchTerm || language) {
@@ -61,3 +61,5 @@ var returnFilteredIssues = function(searchTerm, language) {
   
   return results;
 };
+
+
