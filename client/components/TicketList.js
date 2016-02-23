@@ -28,6 +28,10 @@ class TicketList extends React.Component {
     }, console.log, searchTerm, language);
   }
   
+  componentDidUpdate () {
+    //Anytime the component renders, scroll to the top of the ticket list
+    $('.main-ticket-view')[0].scrollTop = 0;
+  }
   render () {
     
     //for really clean scrolling, we could do something like below to calculate the max height and then set the max height css 
