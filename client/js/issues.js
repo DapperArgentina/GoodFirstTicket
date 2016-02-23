@@ -11,20 +11,53 @@ var getIssuesFromApi = function (successCallback, errCallback) {
     type: 'GET',
     success: successCallback,
     error: errCallback
-    // data: {q: 'is:issue is:open label:"good first bug"',
-    //   per_page: 100}
   };
 
   $.ajax(options);  
 };
 
+
 module.exports.getIssues = function(successCallback, errCallback, searchTerm, language) {
   if (issues = []) {
     getIssuesFromApi((data) => {
       issues = data;
-      successCallback(issues);
+      if (searchTerm || language) {
+        return successCallback(returnFilteredIssues(searchTerm, language));
+      }
+      return successCallback(issues);
     }, errCallback);
   } else {
-    successCallback(issues);
+    if (searchTerm || language) {
+      return successCallback(returnFilteredIssues(searchTerm, language));
+    }
+    return successCallback(issues);
   }
+};
+
+var returnFilteredIssues = function(searchTerm, language) {
+  var results = [];
+  
+  issues.forEach((issue) => {
+    var languageMatch = true;
+    var searchMatch = true;
+    
+    //handle null language issues
+    issue.language = issue.language || '';
+    if(language) {
+      languageMatch = (language.toLowerCase() === issue.language.toLowerCase());
+    }
+    
+    if(searchTerm) {
+      var searchMatch = ( (issue.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
+                          (issue.org_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
+                            (issue.repo_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+                        );                   
+    }
+    
+    if (languageMatch && searchMatch) {
+      results.push(issue);
+    }
+  });
+  
+  return results;
 };
