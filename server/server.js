@@ -4,6 +4,8 @@ var db = require('./db/database');
 var app = express();
 
 var Issues = require('./models/issues');
+var Repos = require('./models/repos');
+
 Issues = new Issues();
 
 app.use(bodyParser.json());
@@ -34,13 +36,12 @@ app.route('/api/issues')
 
 app.route('/api/repos')
   .get(function(req, res){
-    db.raw(`select * from repos`)
-    .then( function (resultsFromSelect) {
-      return resultsFromSelect[0];
-    })
-    .then ( function (results) {
-      res.send(results);
-    }) 
+    Repos.getRepos()
+    .then((results) => res.send(results))
+    .catch(() => {
+      res.statusCode = 501;
+      res.send('Unknown Server Error');
+    });
   });
 
 console.log(`server running on port ${port}`);
