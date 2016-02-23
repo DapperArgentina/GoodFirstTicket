@@ -2,14 +2,12 @@
 //Code that starts app goes here
 const React = require('react');
 const ReactDOM = require('react-dom');
-import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router'
+const { Router, Route, Link, IndexRoute, hashHistory } = require('react-router');
 const TicketList = require('./components/TicketList'); 
 const RepoList = require('./components/RepoList'); 
 const RepoProfile = require('./components/RepoProfile'); 
 
 const App = require('./components/app');
-const data = require('./dummyData');
-
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -22,4 +20,4 @@ ReactDOM.render((
       }
     </Route>
   </Router>
-), document.getElementById('app'))
+), document.getElementById('app'));
