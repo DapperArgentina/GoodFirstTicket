@@ -22,7 +22,6 @@ class TicketList extends React.Component {
     //Fetch issues;
     var self = this;
     GH.getIssues(function(data) {
-      console.log(data);
       self.setState({
         tickets: data
       });
@@ -35,7 +34,7 @@ class TicketList extends React.Component {
     // var maxHeight = $(window).height() - $('.navbar').outerHeight() - margin * 2;
     
     return (
-    <div >
+    <div>
       <TicketSearch searchHandler={this.getIssues} />
       <h4>Open Issues</h4>
       <div className="main-ticket-view">

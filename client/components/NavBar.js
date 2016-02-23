@@ -1,5 +1,9 @@
 const NavEntry = require('./NavEntry');
 const React = require('react');
+const Router = require('react-router').Router;
+const Route = require('react-router').Route;
+const Link = require('react-router').Link;
+
 
 const NavBar = (props) => (
   <div className="navbar-fixed">
@@ -18,7 +22,7 @@ const NavBar = (props) => (
         <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
       </div>
     </nav>
-  </div>
+</div>
 );
 
 module.exports = NavBar;
