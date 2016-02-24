@@ -18,6 +18,9 @@ Issues.prototype.getIssues = function () {
             left join repos r on i.org_name=r.org_name and i.repo_name=r.name 
             order by created_at desc;`)
             .then((results) => {
+              results[0].forEach((issue) => {
+                issue.labels = JSON.parse(issue.labels);
+              });
               this._issues = results[0];
               this._lastUpdateDate = new Date();
               return this._issues;
