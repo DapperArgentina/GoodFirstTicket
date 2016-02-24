@@ -24,7 +24,6 @@ QueueManager.prototype.enqueue = function(fn, argsArray) {
   var self = this;
   return new Promise(function(resolve, reject) {
     self.queue.push({fn: fn, params: argsArray, resolve: resolve, reject: reject});
-    console.log(fn, argsArray, self.queue.length);
   });
 };
 
