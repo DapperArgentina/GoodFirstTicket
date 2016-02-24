@@ -21,7 +21,7 @@ const data = {
   "data_refreshed_at":"2016-02-22T05:14:34.000Z",
   "record_inserted_at":"2016-02-22T05:14:34.000Z",
   "etag":"\"5621117469930ec9afd5538762cb0514\"",
-  "comments": "Wow, this is wonderful!"
+  "comments": "Wow, this is wonderful, number one!!"
 };
 
 class RepoProfile extends Component {
