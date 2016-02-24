@@ -34,6 +34,13 @@ module.exports.getIssues = function(successCallback, errCallback, searchTerm, la
   }
 };
 
+module.exports.getIssuesByRepoId = function(id, successCallback) {
+  module.exports.getIssues(() =>{
+    var filtered = issues.filter((issue) => (issue.repo_id.toString() === id));
+    successCallback(filtered);
+  }, (err) => console.log(err), null, null);
+};
+
 var returnFilteredIssues = function(searchTerm, language) {
   var results = [];
   

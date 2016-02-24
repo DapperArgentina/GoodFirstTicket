@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 const Repos = require('../js/repos');
+const Issues = require('../js/issues');
+
 const TimeAgo = require('../../node_modules/react-timeago/timeago');
 
 const data = {
@@ -33,11 +35,11 @@ class RepoProfile extends Component {
     this.state = {
       thumbsUp: 0,
       thumbsDown: 0,
-      repoToRender: {}
+      repoToRender: {},
+      issues: []
     }
 
     this.getRepo = this.getRepo.bind(this);
-    
   }
 
   getRepo(id){
@@ -49,6 +51,7 @@ class RepoProfile extends Component {
         repoToRender: data
       });
     });
+    Issues.getIssuesByRepoId(id, (data) => this.setState({issues: data}));
   }
 
   onThumbsUp () {
@@ -71,7 +74,6 @@ class RepoProfile extends Component {
   componentDidMount () {
     this.getRepo(this.props.routeParams.repoId);
   }
-
 
   render() {
     return (
@@ -110,7 +112,5 @@ class RepoProfile extends Component {
     );
   }
 };
-
-
 
 module.exports = RepoProfile;
