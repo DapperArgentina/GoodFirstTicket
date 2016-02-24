@@ -16,6 +16,15 @@ var getReposFromApi = function (successCallback, errCallback, searchTerm, langua
   $.ajax(options); 
 };
 
+var findById = function(collection, id) {
+  for (var i=0; i<collection.length; i++) {
+    if(collection.id === id) {
+      return collection[i];
+    }
+  }
+  return null;
+};
+
 var returnFilteredRepos = function(searchTerm, language) {
   var results = [];
   
@@ -64,6 +73,17 @@ module.exports.getRepos = function(successCallback, errCallback, searchTerm, lan
       return successCallback(returnFilteredRepos(searchTerm, language));
     }
     return successCallback(repos);
+  }
+};
+
+module.exports.getRepoById = function(id, successCallback) {
+  if (repos.length === 0) {
+    getReposFromApi((data) => {
+      repos = data;
+      return findById(repos, id);
+    }, errCallback);
+  } else {
+    return findById(repos, id);
   }
 };
 
