@@ -16,7 +16,6 @@ class TicketSearch extends React.Component {
     this.searchHandler = this.searchHandler.bind(this);
     this.languageHandler = this.languageHandler.bind(this);
     this.languageDropDownClass = 'issue-language-dropdown';
-    this.dropdownRendered = false;
   }
 
   languageHandler() {
@@ -34,12 +33,11 @@ class TicketSearch extends React.Component {
     Repos.getLanguages((languages) => {
       this.setState({
         languages: languages
-      });
-      $(`.${this.languageDropDownClass}`).material_select(this.languageHandler);
+      }, () =>  $(`.${this.languageDropDownClass}`).material_select(this.languageHandler));
     });
   }
   
-  componentDidMount() {
+  componentDidMount(){ 
     // Use Materialize custom select input
    //$(`.${this.languageDropDownClass}`).material_select(this.languageHandler);
     this.setLanguages();

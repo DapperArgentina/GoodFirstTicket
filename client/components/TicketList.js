@@ -13,8 +13,6 @@ class TicketList extends React.Component {
     };
     
     this.getIssues = this.getIssues.bind(this);
-    
-    this.getIssues();
   }
   
   getIssues(searchTerm, language){
@@ -27,7 +25,9 @@ class TicketList extends React.Component {
       });
     }, console.log, searchTerm, language);
   }
-  
+  componentDidMount () {
+    this.getIssues();
+  }
   componentDidUpdate () {
     //Anytime the component renders, scroll to the top of the ticket list
     $('.main-ticket-view')[0].scrollTop = 0;
