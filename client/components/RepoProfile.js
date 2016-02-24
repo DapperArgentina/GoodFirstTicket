@@ -47,7 +47,7 @@ class RepoProfile extends React.Component {
     $('.main-repo-view')[0].scrollTop = 0;
   }
   
-  componentDidMount () {
+  componentWillMount () {
     this.getRepo(this.props.routeParams.repoId);
   }
 
