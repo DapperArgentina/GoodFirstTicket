@@ -23,7 +23,7 @@ CREATE TABLE issues (
   html_url nvarchar(255), 
   assignee nvarchar(255),
   body nvarchar(1500),
-  labels nvarchar(500)
+  labels nvarchar(1000)
 );
 
 CREATE TABLE repos (
