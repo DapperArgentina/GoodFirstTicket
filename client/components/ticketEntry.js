@@ -7,7 +7,7 @@ const TicketEntry = (props) => (
     <div className="col s12 m10">
       <div className="card white">
         <div className="card-content black-text" >
-          <span className="card-title"><a className="cyan-text lighten-2" href={props.data.html_url} target="_blank">{props.data.title}</a></span>
+          <span className="card-title activator"><a className="cyan-text lighten-2" href={props.data.html_url} target="_blank">{props.data.title}</a><i className="material-icons right">more_vert</i></span>
           <div className="row">
             <div className="col sm 12">  
               {props.data.labels.map(function(label, index) {
@@ -29,6 +29,10 @@ const TicketEntry = (props) => (
             <p className="right-align col s6">{props.data.language}</p>
           </div>
         </div>
+      <div className="card-reveal">
+        <span className="card-title grey-text text-darken-4">{props.data.title}<i className="material-icons right">close</i></span>
+        <p>{props.data.body}</p>
+      </div>
       </div>
     </div>
   </div>
