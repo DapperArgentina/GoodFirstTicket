@@ -10,14 +10,5 @@ const RepoProfile = require('./components/RepoProfile');
 const App = require('./components/app');
 
 ReactDOM.render((
-  <Router history={hashHistory}>
-    <Route path='/' component={App}>
-      <IndexRoute component={TicketList} />
-      <Route path='repos' component={RepoList} />
-      <Route path='repoProfile' component={RepoProfile} />
-      {// <Route path='repos' component={RepoList} />
-      // <Route path='resources' component={ResourceList} />
-      }
-    </Route>
-  </Router>
+  <App />
 ), document.getElementById('app'));
