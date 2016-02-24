@@ -3,16 +3,13 @@ const NavBar = require('./NavBar');
  
 const linksList = [
   {
-    name: "tickets", url: '/'
+    name: "Tickets", url: '/'
   },
   {
-    name: "repos", url: '/repos'
+    name: "Repositories", url: '/repos'
   }, 
   {
-    name: "resources", url: '/resources'
-  },
-  {
-    name: "repoProfile", url: '/repoProfile'
+    name: "Resources", url: '/resources'
   }
 ];
 
