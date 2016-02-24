@@ -2,7 +2,7 @@ const React = require('react');
 const Repos = require('../js/repos');
 const Issues = require('../js/issues');
 
-const TimeAgo = require('../../node_modules/react-timeago/timeago');
+const TimeAgo = require('react-timeago');
 
 class RepoProfile extends React.Component {
   constructor (props) {
