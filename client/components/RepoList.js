@@ -14,7 +14,6 @@ class RepoList extends React.Component {
     
     this.getRepos = this.getRepos.bind(this);
     
-    // this.getRepos();
   }
   
   getRepos(searchTerm, language){
@@ -31,6 +30,10 @@ class RepoList extends React.Component {
   componentDidUpdate () {
     //Anytime the component renders, scroll to the top of the repo list
     $('.main-repo-view')[0].scrollTop = 0;
+  }
+  
+  componentDidMount () {
+    this.getRepos();
   }
   
   render () {

@@ -16,7 +16,7 @@ var getReposFromApi = function (successCallback, errCallback, searchTerm, langua
   $.ajax(options); 
 };
 
-var returnFilteredIssues = function(searchTerm, language) {
+var returnFilteredRepos = function(searchTerm, language) {
   var results = [];
   
   repos.forEach((repo) => {
@@ -30,9 +30,8 @@ var returnFilteredIssues = function(searchTerm, language) {
     }
     
     if(searchTerm) {
-      var searchMatch = ( (repo.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
-                          (repo.org_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
-                            (repo.repo_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+      var searchMatch = ( (repo.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
+                          (repo.org_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
                         );                   
     }
     

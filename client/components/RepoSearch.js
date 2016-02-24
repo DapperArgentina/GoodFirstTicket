@@ -15,7 +15,7 @@ class RepoSearch extends React.Component {
     
     this.searchHandler = this.searchHandler.bind(this);
     this.languageHandler = this.languageHandler.bind(this);
-    this.languageDropDownClass = 'issue-language-dropdown';
+    this.languageDropDownClass = 'repo-language-dropdown';
     this.dropdownRendered = false;
   }
 
@@ -32,16 +32,18 @@ class RepoSearch extends React.Component {
     //We should only run this once per component rendering (ie. componentDidMount)
     //Multiple calls to material_select screws up the rendering
     Repos.getLanguages((languages) => {
+      var that = this;
       this.setState({
         languages: languages
+      }, function () {
+        $(`.${that.languageDropDownClass}`).material_select('destroy');
+        $(`.${that.languageDropDownClass}`).material_select(that.languageHandler);
       });
-      $(`.${this.languageDropDownClass}`).material_select(this.languageHandler);
     });
   }
 
   componentDidMount() {
     // Use Materialize custom select input
-   //$(`.${this.languageDropDownClass}`).material_select(this.languageHandler);
     this.setLanguages();
   }
 
