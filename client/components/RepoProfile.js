@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const Repos = require('../js/repos');
+const TimeAgo = require('../../node_modules/react-timeago/timeago');
 
 const data = {
   "internal_id":1,
@@ -50,45 +51,6 @@ class RepoProfile extends Component {
     }, console.log, repoName);
   }
 
-  componentDidUpdate () {
-    //Anytime the component renders, scroll to the top of the repo list
-    $('.main-repo-view')[0].scrollTop = 0;
-  }
-  
-  componentDidMount () {
-    this.getRepos(this.props.routeParams.profileName);
-  }
-
-
-
-
-  render() {
-    return (
-    <div className="row main-repo-view">{console.log(this, this.props.routeParams.profileName)} {console.log(this.state.repoToRender)} 
-      <div className="col s12 m10">
-        <h4>Repo Profile</h4>
-        <div className="card white">
-            <div className="card-content black-text">
-              <span className=" cyan-text lighten-2 card-title">{this.state.repoToRender.name}</span>
-              <div className="row">
-                <p className="left-align col s6"><strong>Beginner Tickets</strong>: {this.state.repoToRender.beginner_tickets}</p>
-                <div className="right-align col s6 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
-                  <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
-                </div>
-              </div>
-              <div className="row">
-                <p className="left-align col s6"><strong>Comments</strong>: {this.state.repoToRender.comments}</p>
-                <div className="right-align col s6 mega-octicon octicon-thumbsdown" onClick={ () => {this.onThumbsDown()} }>
-                  <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    );
-  }
-
   onThumbsUp () {
     this.setState({
         thumbsUp: this.state.thumbsUp + 1
@@ -101,31 +63,54 @@ class RepoProfile extends Component {
     });
   }  
 
+  componentDidUpdate () {
+    //Anytime the component renders, scroll to the top of the repo profile
+    $('.main-repo-view')[0].scrollTop = 0;
+  }
+  
+  componentDidMount () {
+    this.getRepos(this.props.routeParams.profileName);
+  }
+
+
+  render() {
+    return (
+    <div className="row main-repo-view"> 
+      <div className="col s12 m10">
+        <h4>Repo Profile</h4>
+        <div className="card white">
+            <div className="card-content black-text">
+              <span className="cyan-text lighten-2 card-title" hfre={this.state.repoToRender.html_url}>{this.state.repoToRender.name}</span>
+              <div className="row">
+                <p className="left-align grey-text lighten-2 col s12">{this.state.repoToRender.description}</p>
+              </div>
+              <div className="row">
+                <strong className="left-align col s3"><span className="octicon octicon-history"></span> Updated <TimeAgo date={this.state.repoToRender.updated_at} /></strong>
+                <strong className="center col s3"><span className="octicon octicon-issue-opened"></span> Beginner tickets {this.state.repoToRender.beginner_tickets}</strong>
+                <strong className="center col s3"><span className="octicon octicon-git-branch"></span> Forks {this.state.repoToRender.forks}</strong>
+                <div className="right-align col s3 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
+                  <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
+                </div>
+              </div>
+              <div className="row">
+                <strong className="left-align col s3 cyan-text lighten-2">{this.state.repoToRender.org_name}</strong>
+                <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repoToRender.html_url} target="_blank">Repo on GitHub</a></strong>
+                <strong className="center col s3">{this.state.repoToRender.language || 'not specified'}</strong>
+                <div className="right-align col s3 mega-octicon octicon-thumbsdown"  onClick={ () => {this.onThumbsDown()} }>
+                  <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
+                </div>
+              </div>
+              <div className="row">
+                <p className="left-align col s6"><strong>Comments</strong>: {this.state.repoToRender.comments}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    );
+  }
 };
 
-
-// Zombie code
-{
-/*
-<div className="repo-profile">
-    <h1 className="jumbotron" href={data.html_url}>{data.name}</h1>
-    <p>Beginner Tickets: {data.beginner_tickets}</p>
-    <p>Comments: {data.comments}</p>
-  </div>
-
-const RepoProfile = () => (
-  <div className="repo-profile">
-    <h1 className="jumbotron" href={data.html_url}>{data.name}</h1>
-    <h4>{props.repo.owner.login}</h4>
-    <p>{props.repo.language}</p>
-    <p>Issues: {props.repo.open_issues_count}</p>
-    <p>Starred: {props.repo.stargazers_count}</p>
-    <p>Watchers: {props.repo.watchers_count}</p>
-    <p>{props.repo.description}</p>
-  </div>
-);
-*/
-}
 
 
 module.exports = RepoProfile;
