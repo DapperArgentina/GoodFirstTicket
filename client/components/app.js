@@ -1,12 +1,6 @@
 const React = require('react');
 const NavBar = require('./NavBar'); 
-const TicketList = require('./TicketList'); 
-// const NavList = require('./NavList'); 
-
-//Code that starts app goes here
-const { Router, Route, Link, IndexRoute, hashHistory } = require('react-router');
-const RepoList = require('./RepoList'); 
-const RepoProfile = require('./RepoProfile'); 
+ 
 const linksList = [
   {
     name: "tickets", url: '/'
@@ -20,8 +14,7 @@ const linksList = [
   {
     name: "repoProfile", url: '/repoProfile'
   }
-  ];
-
+];
 
 
 const App = class App extends React.Component {
