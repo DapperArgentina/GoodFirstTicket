@@ -3,12 +3,16 @@ import React from 'react';
 const ResourceList = (props) => (
     <div className="row"> 
       <div className="col s12 m10">
-      <h4>Resources</h4>
+      <h4>Getting Started</h4>
+      <blockquote>
+      Want to contribute to open source projects on Github, but wondering where to start? You've come to the right place!
+      We comb through open tickets and gather everything labeled good for beginners.
+      </blockquote>
         <div className="card white">
           <div className="card-content black-text" >
-            <span className="card-title"><strong>The guide, the good, and best practice</strong></span>
+            <span className="card-title"><strong>The good, the guides, and the best practices</strong></span>
             <div className="row">
-            <h7 className="left-align col s12">Resource links:</h7>
+            <h6 className="left-align col s12">Resource links:</h6>
               <a className="left-align col s12" href={'https://guides.github.com/introduction/flow/'}>The guide on Understanding the GitHub workflow</a>
               <p className="left-align col s12">
                 Gihub flow is a branch-based system that makes project deployment easy.
