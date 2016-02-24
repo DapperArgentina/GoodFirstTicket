@@ -21,7 +21,9 @@ CREATE TABLE issues (
   created_at datetime,
   updated_at datetime, 
   html_url nvarchar(255), 
-  assignee nvarchar(255)
+  assignee nvarchar(255),
+  body nvarchar(1000),
+  labels nvarchar(255)
 );
 
 CREATE TABLE repos (
@@ -44,7 +46,9 @@ CREATE TABLE repos (
   pushed_at datetime,
   data_refreshed_at datetime,
   record_inserted_at datetime,
-  etag nvarchar(50)
+  etag nvarchar(50),
+  subscribers_count int,
+  network_count int
 );
 
 CREATE INDEX OrgRepo ON repos (name,org_name);

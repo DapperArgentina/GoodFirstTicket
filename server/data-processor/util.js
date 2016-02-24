@@ -110,11 +110,18 @@ var getRepoInformation = repoQueue.createQueuedFunction(function (orgName, repoN
  */
 var convertIssueToDbIssue = function(obj) {
   //reduce down to properties we care about
-  obj = pick(obj, ['id','title','comments','created_at', 'updated_at', 'html_url', 'assignee','repository_url','number']);
+  obj = pick(obj, ['id','title','comments','created_at', 'updated_at', 'html_url', 'assignee','repository_url','number', 'labels']);
   
   //Assignee is either null or an object.  We want the username:
   if (obj.assignee) {
     obj.assignee = obj.assignee.login;
+  }
+
+  //Labels is an array of objects with a url property we don't want.
+  if (obj.labels) {
+    obj.labels.map(function(label) {
+      delete label.url;
+    });
   }
    
   //Convert dates to JS dates so knex can reconvert back to mysql
