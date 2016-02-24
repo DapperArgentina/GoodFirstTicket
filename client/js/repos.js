@@ -24,7 +24,7 @@ var returnFilteredRepos = function(searchTerm, language) {
     var searchMatch = true;
     
     //handle null language
-    repos.language = repos.language || '';
+    repo.language = repo.language || '';
     if(language) {
       languageMatch = (language.toLowerCase() === repo.language.toLowerCase());
     }
