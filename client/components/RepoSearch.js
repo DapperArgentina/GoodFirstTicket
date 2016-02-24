@@ -16,7 +16,6 @@ class RepoSearch extends React.Component {
     this.searchHandler = this.searchHandler.bind(this);
     this.languageHandler = this.languageHandler.bind(this);
     this.languageDropDownClass = 'repo-language-dropdown';
-    this.dropdownRendered = false;
   }
 
   languageHandler() {
@@ -36,7 +35,6 @@ class RepoSearch extends React.Component {
       this.setState({
         languages: languages
       }, function () {
-        $(`.${that.languageDropDownClass}`).material_select('destroy');
         $(`.${that.languageDropDownClass}`).material_select(that.languageHandler);
       });
     });
