@@ -3,6 +3,10 @@ const NavBar = require('./NavBar');
 const TicketList = require('./TicketList'); 
 // const NavList = require('./NavList'); 
 
+//Code that starts app goes here
+const { Router, Route, Link, IndexRoute, hashHistory } = require('react-router');
+const RepoList = require('./RepoList'); 
+const RepoProfile = require('./RepoProfile'); 
 const linksList = [
   {
     name: "tickets", url: '/'
@@ -23,9 +27,11 @@ const App = (props) => (
     <NavBar links={linksList}/>
     <div className="row">
       <div className="main col-sm-10 container">
-        {props.children}
-        {// <TicketList issues={props.tickets} />
-        }
+        <Router history={hashHistory}>
+          <Route path='/' component={TicketList} />
+          <Route path='/repos' component={RepoList} />
+          <Route path='/repoProfile' component={RepoProfile} />
+        </Router>
       </div>
     </div>
   </div>
