@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const Repos = require('../js/repos');
 
 const data = {
   "internal_id":1,
@@ -25,31 +26,58 @@ const data = {
 };
 
 class RepoProfile extends Component {
-  constructor (prop) {
-    super(prop);
+  constructor (props) {
+    super(props);
 
     this.state = {
       thumbsUp: 0,
-      thumbsDown: 0    
+      thumbsDown: 0,
+      repoToRender: {}
     }
+
+    this.getRepos = this.getRepos.bind(this);
+    
   }
+
+  getRepos(repoName){
+    //Fetch repos;
+    //refactor to exclude 'self/this' with es6 syntax?
+    var self = this;
+    Repos.getRepos(function(data) {
+      self.setState({
+        repoToRender: data[0]
+      });
+    }, console.log, repoName);
+  }
+
+  componentDidUpdate () {
+    //Anytime the component renders, scroll to the top of the repo list
+    $('.main-repo-view')[0].scrollTop = 0;
+  }
+  
+  componentDidMount () {
+    this.getRepos(this.props.routeParams.profileName);
+  }
+
+
+
 
   render() {
     return (
-    <div className="row">
+    <div className="row main-repo-view">{console.log(this, this.props.routeParams.profileName)} {console.log(this.state.repoToRender)} 
       <div className="col s12 m10">
         <h4>Repo Profile</h4>
         <div className="card white">
             <div className="card-content black-text">
-              <span className=" cyan-text lighten-2 card-title">{data.name}</span>
+              <span className=" cyan-text lighten-2 card-title">{this.state.repoToRender.name}</span>
               <div className="row">
-                <p className="left-align col s6"><strong>Beginner Tickets</strong>: {data.beginner_tickets}</p>
+                <p className="left-align col s6"><strong>Beginner Tickets</strong>: {this.state.repoToRender.beginner_tickets}</p>
                 <div className="right-align col s6 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
                   <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
                 </div>
               </div>
               <div className="row">
-                <p className="left-align col s6"><strong>Comments</strong>: {data.comments}</p>
+                <p className="left-align col s6"><strong>Comments</strong>: {this.state.repoToRender.comments}</p>
                 <div className="right-align col s6 mega-octicon octicon-thumbsdown" onClick={ () => {this.onThumbsDown()} }>
                   <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
                 </div>
