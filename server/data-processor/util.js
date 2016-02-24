@@ -118,7 +118,6 @@ var convertIssueToDbIssue = function(obj) {
   }
 
   //Labels is an array of objects with a url property we don't want.
-  console.log(obj.labels);
   if (obj.labels) {
     obj.labels.map(function(label) {
       delete label.url;
@@ -127,7 +126,9 @@ var convertIssueToDbIssue = function(obj) {
   }
 
   //Limit body value to 1500 characters
-  obj.body = obj.body.substring(0,1499);
+  if (typeof obj.body === 'string') {
+    obj.body = obj.body.substring(0,1499);
+  }
    
   //Convert dates to JS dates so knex can reconvert back to mysql
   obj.created_at = dateFormat(obj.created_at, 'yyyy-mm-dd HH:MM:ss');
