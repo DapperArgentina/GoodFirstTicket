@@ -17,7 +17,7 @@ const beginnerLabels = [
 var issuePromises = [];
 var issuesFetched = 0;
 
-//
+console.log(`Starting fetch issues process at ${new Date()}`);
 
 //For all beginner labels, get issues
 db.schema.dropTableIfExists('temp_issues')
@@ -34,7 +34,7 @@ db.schema.dropTableIfExists('temp_issues')
 })
 .then(() => {
   return Promise.all(issuePromises)
-    .then(() => db.raw(`RENAME TABLE issues TO old_issues, temp_issues To issues;`)) 
+    .then(() => db.raw(`RENAME TABLE issues TO old_issues, temp_issues To issues;`)); 
 })
 .then(() => db.raw(sql.mergeAndUpsertRepos))
 .then((result) => {
@@ -45,7 +45,16 @@ db.schema.dropTableIfExists('temp_issues')
 })
 .then(() =>db.raw(sql.updateBeginnerTicketCount))
 .then(() => console.log('updated beginner ticket counts'))
-.catch(console.log);
+.then(() => {
+  console.log(`fetch issues process FINISHED at ${new Date()}`);
+  process.exit(0);
+})
+.catch((err) => {
+  console.error(err);
+  console.error(`fetch issues process FAILED at ${new Date()}`);
+  process.exit(1); //exit w/ failure
+});
+
 
 
 
