@@ -1,6 +1,7 @@
 const React = require('react');
+const Repos = require('../js/repos');
 
-class TicketSearch extends React.Component {
+class RepoSearch extends React.Component {
 
   constructor(props) {
     super(props);
@@ -8,17 +9,42 @@ class TicketSearch extends React.Component {
     this.state = {
       searchText: null,
       //default to Javascript for search
-      language: 'Javascript'
+      currentLanguage: 'Javascript',
+      languages: []
     };
     
     this.searchHandler = this.searchHandler.bind(this);
     this.languageHandler = this.languageHandler.bind(this);
+    this.languageDropDownClass = 'repo-language-dropdown';
+    this.dropdownRendered = false;
   }
 
-  languageHandler(e) {
+  languageHandler() {
+    //The way this is invoked, we have no access to event details so we grab value usingjquery
+    var newLanguage = this.grabSelectedLanguageVal();
+    this.props.searchHandler(this.state.searchText, newLanguage);
     this.setState({
-      language: e.target.value
-    })
+      currentLanguage: newLanguage
+    });
+  }
+
+  setLanguages () {
+    //We should only run this once per component rendering (ie. componentDidMount)
+    //Multiple calls to material_select screws up the rendering
+    Repos.getLanguages((languages) => {
+      var that = this;
+      this.setState({
+        languages: languages
+      }, function () {
+        $(`.${that.languageDropDownClass}`).material_select('destroy');
+        $(`.${that.languageDropDownClass}`).material_select(that.languageHandler);
+      });
+    });
+  }
+
+  componentDidMount() {
+    // Use Materialize custom select input
+    this.setLanguages();
   }
 
   searchHandler(e) {
@@ -31,24 +57,30 @@ class TicketSearch extends React.Component {
       searchText: e.target.value
     });
   }
+
+  grabSelectedLanguageVal() {
+    var $selected = $(`.${this.languageDropDownClass}`).find('.selected');
+    return $selected[0].innerText.trim();
+  }
+
+  dummy (){
+    //this doesn't actually get called because onChange doesn't work w/ the materialize select.
+    //we just feed it in so React doesn't throw any errors
+  }
+
   render () {
-    return <div className="col-md-10 col-md-offset-1">
-              <input className="form-control" type="text" value={this.state.searchText} 
+    return <div className="row">
+            <div className="input-field col s8">
+              <input type="text" value={this.state.searchText} 
                 placeholder="Search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
-              <select value={this.state.language} onChange={this.languageHandler}>
-                <option value="Javascript">Javascript</option>
-                <option value="HTML">HTML</option>
-                <option value="C">C</option>
-                <option value="Java">Java</option>
-                <option value="Python">Python</option>
-                <option value="Ruby">Ruby</option>
-                <option value="XSLT">XSLT</option>
-                <option value="TypeScript">TypeScript</option>
-                <option value="C++">C++</option>
-                <option value="PHP">PHP</option>
+            </div>
+            <div className="input-field col s2">
+              <select className={this.languageDropDownClass} value={this.state.currentLanguage} onChange={this.dummy}>
+                {this.state.languages.map((lang, index) => <option value={lang} key={lang}>{lang}</option>)}
               </select>
-           </div>;
+            </div>
+          </div>;
   }
 }
 
-module.exports = TicketSearch;
+module.exports = RepoSearch;

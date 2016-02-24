@@ -23,7 +23,7 @@ const RepoEntry = (props) => (
               <div className="row">
                 <strong className="left-align col s3 cyan-text lighten-2">{props.data.org_name}</strong>
                 <strong className="center col s3" ><a className="cyan-text lighten-2" href={props.data.html_url} target="_blank">Repo on GitHub</a></strong>
-                <strong className="center col s3">{props.data.language}</strong>
+                <strong className="center col s3">{props.data.language || 'not specified'}</strong>
                 <div className="right-align col s3 mega-octicon octicon-thumbsdown"></div>
               </div>
           </div>

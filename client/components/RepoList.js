@@ -1,8 +1,7 @@
 const React = require('react');
 const RepoSearch = require('./RepoSearch');
 const RepoEntry = require('./RepoEntry');
-const $ = require('jquery');
-const GH = require('../js/gitHubWorker');
+const Repos = require('../js/repos');
 
 class RepoList extends React.Component {
   
@@ -10,24 +9,31 @@ class RepoList extends React.Component {
     super(props);
     
     this.state = {
-      repos: []
+      reposToRender: []
     };
     
     this.getRepos = this.getRepos.bind(this);
     
-    this.getRepos();
   }
   
   getRepos(searchTerm, language){
     //Fetch repos;
     //refactor to exclude 'self/this' with es6 syntax?
     var self = this;
-    GH.getRepos(function(data) {
-      console.log(data);
+    Repos.getRepos(function(data) {
       self.setState({
-        repos: data
+        reposToRender: data.slice(0,199)
       });
     }, console.log, searchTerm, language);
+  }
+
+  componentDidUpdate () {
+    //Anytime the component renders, scroll to the top of the repo list
+    $('.main-repo-view')[0].scrollTop = 0;
+  }
+  
+  componentDidMount () {
+    this.getRepos();
   }
   
   render () {
@@ -40,7 +46,7 @@ class RepoList extends React.Component {
       <RepoSearch searchHandler={this.getRepos} />
       <h4>Repositories</h4>
       <div className="main-repo-view">
-        {this.state.repos.map ((repo, index) => 
+        {this.state.reposToRender.map ((repo, index) => 
           <RepoEntry data={repo} key={index} />
         )}
       </div>

@@ -16,7 +16,7 @@ var getReposFromApi = function (successCallback, errCallback, searchTerm, langua
   $.ajax(options); 
 };
 
-var returnFilteredIssues = function(searchTerm, language) {
+var returnFilteredRepos = function(searchTerm, language) {
   var results = [];
   
   repos.forEach((repo) => {
@@ -24,15 +24,14 @@ var returnFilteredIssues = function(searchTerm, language) {
     var searchMatch = true;
     
     //handle null language
-    repos.language = repos.language || '';
+    repo.language = repo.language || '';
     if(language) {
       languageMatch = (language.toLowerCase() === repo.language.toLowerCase());
     }
     
     if(searchTerm) {
-      var searchMatch = ( (repo.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
-                          (repo.org_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
-                            (repo.repo_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+      var searchMatch = ( (repo.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) ||
+                          (repo.org_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
                         );                   
     }
     
