@@ -9,7 +9,7 @@ const linksList = [
     name: "Repositories", url: '/repos'
   }, 
   {
-    name: "Resources", url: '/resources'
+    name: "Getting Started", url: '/resources'
   }
 ];
 
