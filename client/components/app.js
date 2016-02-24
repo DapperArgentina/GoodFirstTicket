@@ -22,30 +22,29 @@ const linksList = [
   }
   ];
 
-const App = (props) => (
-  <div className='app-shell grey lighten-2'>
-    <NavBar links={linksList}/>
-    <div className="row">
-      <div className="main col-sm-10 container">
-        <Router history={hashHistory}>
-          <Route path='/' component={TicketList} />
-          <Route path='/repos' component={RepoList} />
-          <Route path='/repoProfile' component={RepoProfile} />
-        </Router>
+
+
+const App = class App extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      route: '/'
+    };
+  }
+  
+  render () {
+    return (
+    <div className='app-shell grey lighten-2'>
+      <NavBar links={linksList}/>
+      <div className="row">
+        <div className="main col-sm-10 container">
+          {this.props.children}
+        </div>
       </div>
     </div>
-  </div>
-);
-{
-// render((
-//   <Router history={hashHistory}>
-//     <Route path='/' component={App}>
-//       <IndexRoute component={TicketList} />
-//       <Route path='repos' component={RepoList} />
-//       <Route path='repoProfile' component={RepoProfile} />
-//       <Route path='resources' component={ResourceList} />
-//     </Route>
-//   </Router>
-// )
-}
+    );
+  }
+
+};
 module.exports = App;

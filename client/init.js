@@ -2,13 +2,31 @@
 //Code that starts app goes here
 const React = require('react');
 const ReactDOM = require('react-dom');
-const { Router, Route, Link, IndexRoute, hashHistory } = require('react-router');
+const { Router, Route, Link, IndexRoute, hashHistory, RouterContext } = require('react-router');
 const TicketList = require('./components/TicketList'); 
 const RepoList = require('./components/RepoList'); 
 const RepoProfile = require('./components/RepoProfile'); 
 
 const App = require('./components/app');
 
+var wrapComponent = function(Component, props) {
+  return React.createClass({
+    render: function() {
+      return React.createElement(Component, props);
+    }
+  });
+};
+
+
 ReactDOM.render((
-  <App />
+  <Router history={hashHistory}>
+    <Route path='/' component={App}>
+      <IndexRoute component={wrapComponent(TicketList, {p1: 'woah'})} />
+      <Route path='repos' component={RepoList} />
+      <Route path='repoProfile/:profileName' component={RepoProfile} />
+    </Route>
+  </Router>
 ), document.getElementById('app'));
+
+
+
