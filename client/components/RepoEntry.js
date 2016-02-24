@@ -8,7 +8,7 @@ const RepoEntry = (props) => (
         <div className="card white">
           <div className="card-content black-text" >
               <span className="card-title">
-                <Link className="left cyan-text lighten-2" to={`/repoProfile`}>{props.data.name}
+                <Link className="left cyan-text lighten-2" to={`/repoProfile/${props.data.id}`}>{props.data.name}
                 </Link>
               </span>
               <div className="row">

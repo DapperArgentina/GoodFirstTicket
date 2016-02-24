@@ -18,7 +18,7 @@ var getReposFromApi = function (successCallback, errCallback, searchTerm, langua
 
 var findById = function(collection, id) {
   for (var i=0; i<collection.length; i++) {
-    if(collection.id === id) {
+    if(collection[i].id.toString() === id) {
       return collection[i];
     }
   }
@@ -80,10 +80,10 @@ module.exports.getRepoById = function(id, successCallback) {
   if (repos.length === 0) {
     getReposFromApi((data) => {
       repos = data;
-      return findById(repos, id);
-    }, errCallback);
+      successCallback(findById(repos, id));
+    }, (err) => console.log(err));
   } else {
-    return findById(repos, id);
+    successCallback(findById(repos, id));
   }
 };
 

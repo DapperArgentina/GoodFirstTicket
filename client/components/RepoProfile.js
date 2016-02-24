@@ -36,19 +36,19 @@ class RepoProfile extends Component {
       repoToRender: {}
     }
 
-    this.getRepos = this.getRepos.bind(this);
+    this.getRepo = this.getRepo.bind(this);
     
   }
 
-  getRepos(repoName){
+  getRepo(id){
     //Fetch repos;
     //refactor to exclude 'self/this' with es6 syntax?
     var self = this;
-    Repos.getRepos(function(data) {
+    Repos.getRepoById(id, function(data) {
       self.setState({
-        repoToRender: data[0]
+        repoToRender: data
       });
-    }, console.log, repoName);
+    });
   }
 
   onThumbsUp () {
@@ -69,7 +69,7 @@ class RepoProfile extends Component {
   }
   
   componentDidMount () {
-    this.getRepos(this.props.routeParams.profileName);
+    this.getRepo(this.props.routeParams.profileName);
   }
 
 
