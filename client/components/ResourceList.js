@@ -11,7 +11,7 @@ const ResourceList = (props) => (
             <h7 className="left-align col s12">Resource links:</h7>
               <a className="left-align col s12" href={'https://guides.github.com/introduction/flow/'}>The guide on Understanding the GitHub workflow</a>
               <p className="left-align col s12">
-                Gihub flow is a branch-based system that supports teams and project deployments made regularly.
+                Gihub flow is a branch-based system that makes project deployment easy.
               </p> 
               <a  className="left-align col s12" href={'https://guides.github.com/activities/contributing-to-open-source/'}>The guide on Open Source contribution</a>
               <p className="left-align col s12">
