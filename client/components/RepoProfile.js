@@ -1,4 +1,4 @@
-const React = require('react');
+import React, { Component } from 'react';
 
 const data = {
   "internal_id":1,
@@ -21,29 +21,60 @@ const data = {
   "data_refreshed_at":"2016-02-22T05:14:34.000Z",
   "record_inserted_at":"2016-02-22T05:14:34.000Z",
   "etag":"\"5621117469930ec9afd5538762cb0514\"",
-  "comments": "Wow, this is wonderful!",
-  "thumbsUp": 0,
-  "thumbsDown": 0
+  "comments": "Wow, this is wonderful!"
 };
 
-const RepoProfile = () => (
-  <div className="row">
+class RepoProfile extends Component {
+  constructor (prop) {
+    super(prop);
+
+    this.state = {
+      thumbsUp: 0,
+      thumbsDown: 0    
+    }
+  }
+
+  render() {
+    return (
+    <div className="row">
       <div className="col s12 m10">
-      <h4>Repo Profile</h4>
+        <h4>Repo Profile</h4>
         <div className="card white">
-          <div className="card-content black-text" >
-            <span className=" cyan-text lighten-2 card-title">{data.name}</span>
+            <div className="card-content black-text">
+              <span className=" cyan-text lighten-2 card-title">{data.name}</span>
               <div className="row">
-                <p className="left-align col s12">Beginner Tickets: {data.beginner_tickets}</p>
-                <p className="left-align col s12">Comments: {data.comments}</p>
-                <span className="right-align col s0 mega-octicon octicon-thumbsup"> {data.thumbsUp}</span>
-                <span className="right-align col s0 mega-octicon octicon-thumbsdown"> {data.thumbsDown}</span>
+                <p className="left-align col s6"><strong>Beginner Tickets</strong>: {data.beginner_tickets}</p>
+                <div className="right-align col s6 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
+                  <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
+                </div>
               </div>
+              <div className="row">
+                <p className="left-align col s6"><strong>Comments</strong>: {data.comments}</p>
+                <div className="right-align col s6 mega-octicon octicon-thumbsdown" onClick={ () => {this.onThumbsDown()} }>
+                  <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
+                </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-);
+    );
+  }
+
+  onThumbsUp () {
+    this.setState({
+        thumbsUp: this.state.thumbsUp + 1
+    });
+  }
+
+  onThumbsDown () {
+    this.setState({
+        thumbsDown: this.state.thumbsDown - 1
+    });
+  }  
+
+};
+
 
 // Zombie code
 {
