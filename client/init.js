@@ -23,7 +23,7 @@ ReactDOM.render((
     <Route path='/' component={App}>
       <IndexRoute component={wrapComponent(TicketList, {p1: 'woah'})} />
       <Route path='repos' component={RepoList} />
-      <Route path='repoProfile/:profileName' component={RepoProfile} />
+      <Route path='repoProfile/:repoId' component={RepoProfile} />
       <Route path='resources' component={ResourceList} />
     </Route>
   </Router>

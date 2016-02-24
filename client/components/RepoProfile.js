@@ -69,7 +69,7 @@ class RepoProfile extends Component {
   }
   
   componentDidMount () {
-    this.getRepo(this.props.routeParams.profileName);
+    this.getRepo(this.props.routeParams.repoId);
   }
 
 
