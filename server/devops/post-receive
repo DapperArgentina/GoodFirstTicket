@@ -8,7 +8,7 @@ echo "--> Running npm install..."
 npm install
 
 echo "--> Running npm build..."
-npm run build
+npm run prodbuild
 
 echo "--> Restarting web server..."
 npm run restartForever

@@ -1,65 +1,44 @@
-import React, { Component } from 'react';
+const React = require('react');
 const Repos = require('../js/repos');
-const TimeAgo = require('../../node_modules/react-timeago/timeago');
+const Issues = require('../js/issues');
 
-const data = {
-  "internal_id":1,
-  "id":1357796,
-  "name":"emscripten",
-  "org_name":"kripken",
-  "html_url":"https://github.com/kripken/emscripten",
-  "language":"C",
-  "beginner_tickets":35,
-  "description":"Emscripten: An LLVM-to-JavaScript Compiler",
-  "stargazers_count":9723,
-  "watchers_count":9723,
-  "has_wiki":1,
-  "has_pages":0,
-  "open_issues":740,
-  "forks":1177,
-  "created_at":"2011-02-12T05:23:30.000Z",
-  "updated_at":"2016-02-22T04:27:46.000Z",
-  "pushed_at":"2016-02-20T19:46:56.000Z",
-  "data_refreshed_at":"2016-02-22T05:14:34.000Z",
-  "record_inserted_at":"2016-02-22T05:14:34.000Z",
-  "etag":"\"5621117469930ec9afd5538762cb0514\"",
-  "comments": "Wow, this is wonderful, number one!!"
-};
+const TimeAgo = require('react-timeago');
 
-class RepoProfile extends Component {
+class RepoProfile extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
       thumbsUp: 0,
       thumbsDown: 0,
-      repoToRender: {}
-    }
+      repoToRender: {},
+      issues: []
+    };
 
-    this.getRepos = this.getRepos.bind(this);
-    
+    this.getRepo = this.getRepo.bind(this);
   }
 
-  getRepos(repoName){
+  getRepo(id){
     //Fetch repos;
     //refactor to exclude 'self/this' with es6 syntax?
     var self = this;
-    Repos.getRepos(function(data) {
+    Repos.getRepoById(id, function(data) {
       self.setState({
-        repoToRender: data[0]
+        repoToRender: data
       });
-    }, console.log, repoName);
+    });
+    Issues.getIssuesByRepoId(id, (data) => this.setState({issues: data}));
   }
 
   onThumbsUp () {
     this.setState({
-        thumbsUp: this.state.thumbsUp + 1
+      thumbsUp: this.state.thumbsUp + 1
     });
   }
 
   onThumbsDown () {
     this.setState({
-        thumbsDown: this.state.thumbsDown - 1
+      thumbsDown: this.state.thumbsDown - 1
     });
   }  
 
@@ -69,9 +48,8 @@ class RepoProfile extends Component {
   }
   
   componentDidMount () {
-    this.getRepos(this.props.routeParams.profileName);
+    this.getRepo(this.props.routeParams.repoId);
   }
-
 
   render() {
     return (
@@ -109,8 +87,6 @@ class RepoProfile extends Component {
     </div>
     );
   }
-};
-
-
+}
 
 module.exports = RepoProfile;

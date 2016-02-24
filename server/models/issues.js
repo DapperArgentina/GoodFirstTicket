@@ -13,7 +13,7 @@ Issues.prototype.getIssues = function () {
   
   if (this._issues.length === 0 ||
    hoursSinceLastFetch > 1) {
-    return db.raw(`select i.*, r.language 
+    return db.raw(`select i.*, r.language, r.id as repo_id 
             from issues i 
             left join repos r on i.org_name=r.org_name and i.repo_name=r.name 
             order by created_at desc;`)

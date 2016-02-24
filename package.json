@@ -12,8 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client",
-    "startForever": "forever start --spinSleepTime 10000 server/server.js",
-    "restartForever": "forever restart server/server.js"
+    "prodbuild": "NODE_ENV=production webpack -p",
+    "startForever": "NODE_ENV=production forever start --spinSleepTime 10000 server/server.js",
+    "restartForever": "NODE_ENV=production forever restart server/server.js"
   },
   "repository": {
     "type": "git",

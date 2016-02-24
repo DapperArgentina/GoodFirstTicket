@@ -46,7 +46,7 @@ app.route('/api/repos')
     });
   });
 
-console.log(`server running on port ${port}`);
+console.log(`server running on port ${port} in ${process.env.NODE_ENV} mode`);
 // start listening to requests on port 3000
 app.listen(port);
 

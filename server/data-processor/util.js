@@ -11,7 +11,11 @@ var dateFormat = require('dateformat');
 
 var QueueManager = require('./queueManager');
 
-var gh = new QueueManager(30);
+//The issue API is throttled by 30 req/min
+var issueQueue = new QueueManager(30);
+
+//The repo API is throttled by 5000/hour but QueueManager is in minutes
+var repoQueue = new QueueManager(60, 304);
 
 /**Basic gitHub request information that we want to use in almost all API interactions */
 var baseGithubOptions = {
@@ -25,7 +29,7 @@ var baseGithubOptions = {
 /**Searches Github for issues w/ the provided label.
  * Returns a promise which resolves to a a JSON object containing the issues.
  */
-var getGithubIssuesByLabel = gh.createQueuedFunction(function(label, getAllPages) {
+var getGithubIssuesByLabel = issueQueue.createQueuedFunction(function(label, getAllPages) {
   if (getAllPages === undefined) {
     getAllPages = true;
   }
@@ -83,7 +87,7 @@ var getAllSubsequentPages = function(url) {
       }
     });
   };
-  recursiveGet = gh.createQueuedFunction(recursiveGet);
+  recursiveGet = issueQueue.createQueuedFunction(recursiveGet);
   return recursiveGet(url);
 };
 
@@ -91,7 +95,7 @@ var getAllSubsequentPages = function(url) {
  * Optionally, takes an etag.  If provided Github will only send response if there
  * is new data since last update
  */
-var getRepoInformation = gh.createQueuedFunction(function (orgName, repoName, etag) {
+var getRepoInformation = repoQueue.createQueuedFunction(function (orgName, repoName, etag) {
   var options = {
     url: `https://api.github.com/repos/${orgName}/${repoName}`,
     headers: {'If-None-Match': etag }
