@@ -9,9 +9,9 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "node server/server.js",
-    "testclient": "mocha client/ClientTest.js",
-    "testserver": "mocha server/ServerTest.js",
-    "testdata": "mocha client/ClientTest.js",
+    "testclient": "mocha client/spec/ClientTest.js",
+    "testserver": "mocha server/spec/ServerTest.js",
+    "testdata": "mocha server/spec/DataTest.js",
     "build": "webpack",
     "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client",
     "prodbuild": "NODE_ENV=production webpack -p",
