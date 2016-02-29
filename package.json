@@ -9,9 +9,9 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "node server/server.js",
-    "cli-test": "mocha models/UserTest.js models/JobTest.js controllers/userControllerTest.js controllers/jobControllerTest.js",
-    "ser-test": "mocha models/UserTest.js models/JobTest.js controllers/userControllerTest.js controllers/jobControllerTest.js",
-    "data-test": "mocha models/UserTest.js models/JobTest.js controllers/userControllerTest.js controllers/jobControllerTest.js",
+    "testclient": "mocha client/ClientTest.js",
+    "testserver": "mocha server/ServerTest.js",
+    "testdata": "mocha client/ClientTest.js",
     "build": "webpack",
     "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client",
     "prodbuild": "NODE_ENV=production webpack -p",
