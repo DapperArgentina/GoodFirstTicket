@@ -29,7 +29,7 @@ First, you need to setup the mysql database.  Steps are:
   5. View the repos and issues tables and make sure you have data.
   
 ###Dev Environment
-After setting your database up, you're almost ready to start working, just run npm install to install dependencies. 'npm run start'
+After setting your database up, you're almost ready to start working, just run npm install to install dependencies. `npm run start`
 will start the web server.   If you want to rerun the background data collection, you can either run the .js files manually
 as we did when setting up the database or run devops/data-processor.sh.  
 
@@ -51,7 +51,7 @@ Below is the folder structure we are using for the git workflow.
 ####Automating server startup and background jobs
 We use the npm forever package and cron jobs to make sure the server always starts and stays running. Cron is also used to automate
 the background Git data collection.  These scripts are located at devops/starter.sh and devops/data-processor.sh. To set this up:
-  1. Install the npm forever package using 'npm install -g forever'
+  1. Install the npm forever package using `npm install -g forever`
   2. Open cron w/ the command `crontab -e`
   3. Copy the cron configurations from devops/cronjobs.txt to your crontab config file.
   
