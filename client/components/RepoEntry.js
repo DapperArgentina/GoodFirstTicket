@@ -40,16 +40,16 @@ class RepoEntry extends React.Component {
                   <p className="left-align grey-text lighten-2 col s12">{this.state.repo.data.description}</p>
                 </div>
                 <div className="row">
-                  <strong className="left-align col s3"><span className="octicon octicon-history"></span> Updated <TimeAgo date={this.state.repo.data.updated_at} /></strong>
-                  <strong className="center col s3"><span className="octicon octicon-issue-opened"></span> Beginner Tickets {this.state.repo.data.beginner_tickets}</strong>
-                  <strong className="center col s3"><span className="octicon octicon-git-branch"></span> Forks {this.state.repo.data.forks}</strong>
+                  <strong className="left-align col s3"><span className="octicon octicon-history"></span> updated <TimeAgo date={this.state.repo.data.updated_at} /></strong>
+                  <strong className="center col s3"><span className="octicon octicon-issue-opened"></span> beginner tickets {this.state.repo.data.beginner_tickets}</strong>
+                  <strong className="center col s3"><span className="octicon octicon-git-branch"></span> forks {this.state.repo.data.forks}</strong>
                   <div className="right-align col s3 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
                     <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
                   </div>
                 </div>
                 <div className="row">
                   <strong className="left-align col s3 cyan-text lighten-2">{this.state.repo.data.org_name}</strong>
-                  <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repo.data.html_url} target="_blank">Repo on GitHub</a></strong>
+                  <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repo.data.html_url} target="_blank">repo on github</a></strong>
                   <strong className="center col s3">{this.state.repo.data.language || 'not specified'}</strong>
                   <div className="right-align col s3 mega-octicon octicon-thumbsdown"  onClick={ () => {this.onThumbsDown()} }>
                     <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
