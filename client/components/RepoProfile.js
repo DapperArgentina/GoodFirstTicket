@@ -51,7 +51,7 @@ class RepoProfile extends React.Component {
     <div>
       <div className="row main-repo-view"> 
         <div className="col s10">
-          <h4>Repo Profile</h4>
+          <h4>repo profile</h4>
           <div className="card white">
               <div className="card-content black-text">
                 <span className="card-title"><a className="cyan-text lighten-2" href={this.state.repoToRender.html_url} target="_blank">{this.state.repoToRender.name}</a></span>
@@ -81,13 +81,13 @@ class RepoProfile extends React.Component {
                   <strong className="right-align col s3">{this.state.repoToRender.language || 'not specified'}</strong>
               </div>
                 <div className="row">
-                  <p className="left-align col s6"><strong>Comments</strong>: {this.state.repoToRender.comments}</p>
+                  <p className="left-align col s6"><strong>comments</strong>: {this.state.repoToRender.comments}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h5>{this.state.repoToRender.beginner_tickets} Beginner Tickets</h5>
+      <h5>{this.state.repoToRender.beginner_tickets} beginner tickets</h5>
       <div className="main-ticket-view">
           {this.state.issues.map ((ticket, index) => 
             <TicketEntry data={ticket} key={index} />
