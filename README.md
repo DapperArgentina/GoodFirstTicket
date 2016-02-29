@@ -1,6 +1,6 @@
 [![Stories in Backlog](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=backlog&title=Backlog)](https://waffle.io/DapperArgentina/DapperArgentina)
 [![Stories in Ready](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=ready&title=Ready)](https://waffle.io/DapperArgentina/DapperArgentina)
-[![Stories in Done](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=done&title=Done)](https://waffle.io/DapperArgentina/DapperArgentina)
+[![Stories in Done](https://badge.waffle.io/DapperArgentina/DapperArgentina.png?label=Done)](https://waffle.io/DapperArgentina/DapperArgentina)
 # DapperArgentina  
 
 > An app that guides software engineers on how to start contributing to the open source community on Github.  
