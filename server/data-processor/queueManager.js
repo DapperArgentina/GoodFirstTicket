@@ -1,3 +1,15 @@
+/**
+ * Helper library that enables throttling of function calls.  You specify an maximum number of calls to make
+ * per minute and can then wrap functions in the QueueManager.  When executing the wrapped function, you will receive
+ * a promise that resolves to your original function result after QueueManager executes the function.  QueueManager will 
+ * execute up to the limit # of calls per minute before waiting for the count to reset.  Example
+ * 
+ * var qm = new QueueManager(60);
+ * var asyncPromisifiedFunction = function(){...}
+ * var throttledFn = qm.createQueuedFunction(asyncPromisifiedFunction)
+ * throttledFn() //returns a promise that resolves to the original function result.
+ * //If you called throttledFn >60/min the calls over 60 would not execute until 60 seconds had passed.
+ */
 const DateDiff = require('date-diff');
 
 var QueueManager = function(reqPerMin, statusCodeToNotCount) {
@@ -51,7 +63,7 @@ QueueManager.prototype.dequeue = function() {
     //We are out of requests.  Schedule a wait until the reset.  We add 100ms to make sure
     //checkRequestTimer actually thinks its time to reset.
     console.log(`Waiting 60 seconds.  ${this.queue.length} items in queue`);
-    setTimeout(this.dequeue.bind(this), this.secondsBeforeRequestReset*1000 + 100);
+    setTimeout(this.dequeue.bind(this), this.secondsBeforeRequestReset * 1000 + 100);
   }
 };
 

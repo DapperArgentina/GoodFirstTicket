@@ -1,3 +1,7 @@
+/**Contains helper functions focused on interacting w/ the Github API and converting API responses
+ * to objects that match our database schema.
+ */
+'use strict';
 
 const request = require('request-promise');
 const Promise = require('bluebird');

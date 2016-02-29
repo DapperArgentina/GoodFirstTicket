@@ -1,3 +1,7 @@
+/**
+ * This script iterates through all repos in our repos db table and refreshes data from the github API
+ * for any repo that has not been refreshed recently.
+ */
 'use strict';
 
 const Promise = require('bluebird');
