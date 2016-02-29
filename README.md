@@ -19,7 +19,9 @@
 # Development
 
 ## Installing Dependencies
-From within the root directory:
+Below is some basic information on getting started w/ the project.  Both the client and server folders
+contain README documents with more information.  In particular, you will likely need to do additional configuration if
+working on server/backend changes.
 
 ```sh
 npm install

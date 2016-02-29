@@ -1,3 +1,7 @@
+/**
+ * This script grabs all "beginner" issues from Github, inserts them into our database (issues table) and inserts
+ * any newly identified "beginner" repos into the db (repos table).
+ */
 'use strict';
 
 const Promise = require('bluebird');
@@ -11,7 +15,9 @@ const beginnerLabels = [
   'easy',
   'easyfix',
   'good-first-pr',
-  'good-first-issue'
+  'good-first-issue',
+  'first-timers-only',
+  'easy pick'
 ];
  
 var issuePromises = [];
@@ -19,7 +25,12 @@ var issuesFetched = 0;
 
 console.log(`Starting fetch issues process at ${new Date()}`);
 
-//For all beginner labels, get issues
+/**
+ * We drop all beginner issues from our db and refetch them every time this script runs.  To avoid a
+ * scenario where we drop the old data and fail to get new data (eg. Github's API is down), we put the
+ * new issues into temp_issues.  Once we've successfully grabbed all issues, we swap temp_issues into
+ * the issues table.  The old issues are then moved to old_issues.
+ */
 db.schema.dropTableIfExists('temp_issues')
 .then(()=> db.schema.dropTableIfExists('old_issues'))
 .then(() => db.raw(`CREATE TABLE temp_issues LIKE issues;`))

@@ -1,3 +1,7 @@
+/**
+ * Test code that was written to help test QueueManager functionality.  Should be moved into a proper
+ * testing framework when we have one
+ */
 'use strict';
 
 // var util = require('./util');
@@ -42,7 +46,7 @@ var f = function(){
   return new Promise(function(resolve){
     setTimeout(()=>(resolve(1)), 100);
   });
-} 
+}; 
 var throttledFn = gh.createQueuedFunction(f);
 // var a1 = gh.enqueue(getGithubIssuesByLabel,['good-first-pr'])
 // var a2 = gh.enqueue(getGithubIssuesByLabel,['dog'])
@@ -54,7 +58,7 @@ var throttledFn = gh.createQueuedFunction(f);
 // Promise.all([a1,a2,a3,b1,b2,b3]).then((results) => {
 //   results.forEach((res) => console.log(res.body.items.length));
 // });
-var counter=90
+var counter = 90;
 while(counter-- >0) {
   throttledFn();
 }
