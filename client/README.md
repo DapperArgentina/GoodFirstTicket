@@ -1,6 +1,4 @@
-overall organization
-webpack - init file, bundle file, what to do to start writing code and see the changes
-react-router - 
+#Client-side README#
 
 Our client-side uses React, React-Router, and ES6 and achieves this with webpack. Webpack compiles all of the client-side files into a single .js file that the browser can read.
 
