@@ -48,7 +48,7 @@ class RepoEntry extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <strong className="left-align col s3 cyan-text lighten-2">{this.state.repo.data.org_name}</strong>
+                  <strong className="left-align col s3"><a className="cyan-text lighten-2" href={"http://www.github.com/" + this.state.repo.data.org_name} target="_blank">{this.state.repo.data.org_name}</a></strong>
                   <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repo.data.html_url} target="_blank">repo on github</a></strong>
                   <strong className="center col s3">{this.state.repo.data.language || 'not specified'}</strong>
                   <div className="right-align col s3 mega-octicon octicon-thumbsdown"  onClick={ () => {this.onThumbsDown()} }>
