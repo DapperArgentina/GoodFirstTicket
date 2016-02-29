@@ -3,7 +3,7 @@ import React from 'react';
 const ResourceList = (props) => (
     <div className="row"> 
       <div className="col s12 m10">
-      <h4>Getting Started</h4>
+      <h4>getting started</h4>
       <blockquote>
       Want to contribute to open source projects on Github, but wondering where to start? You've come to the right place!
       We comb through open tickets and gather everything labeled good for beginners.
