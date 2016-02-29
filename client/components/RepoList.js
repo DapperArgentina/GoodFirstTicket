@@ -22,6 +22,7 @@ class RepoList extends React.Component {
     var self = this;
     Repos.getRepos(function(data) {
       self.setState({
+        numberOfRepos: data.length,
         reposToRender: data.slice(0,199)
       });
     }, console.log, searchTerm, language);
@@ -44,7 +45,7 @@ class RepoList extends React.Component {
     return (
     <div >
       <RepoSearch searchHandler={this.getRepos} />
-      <h4>repositories</h4>
+      <h4>{this.state.numberOfRepos} repositories</h4>
       <div className="main-repo-view">
         {this.state.reposToRender.map ((repo, index) => 
           <RepoEntry data={repo} key={index} />
