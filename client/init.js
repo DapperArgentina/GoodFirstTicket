@@ -10,18 +10,10 @@ const RepoList = require('./components/RepoList');
 const RepoProfile = require('./components/RepoProfile'); 
 const ResourceList = require('./components/ResourceList');
 
-var wrapComponent = function(Component, props) {
-  return React.createClass({
-    render: function() {
-      return React.createElement(Component, props);
-    }
-  });
-};
-
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path='/' component={App}>
-      <IndexRoute component={wrapComponent(TicketList, {p1: 'woah'})} />
+      <IndexRoute component={TicketList} />
       <Route path='repos' component={RepoList} />
       <Route path='repoProfile/:repoId' component={RepoProfile} />
       <Route path='resources' component={ResourceList} />

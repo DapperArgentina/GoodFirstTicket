@@ -21,10 +21,10 @@ const TicketEntry = (props) => (
             </div>
           </div>
           <div className="row">
-            <p className="left-align col s6"><span className="octicon octicon-calendar"></span> Created <TimeAgo date={props.data.created_at} /></p>
+            <p className="left-align col s6"><span className="octicon octicon-calendar"></span> created <TimeAgo date={props.data.created_at} /></p>
           </div>
           <div className="row">
-            <p className="left-align col s6">Repo: <Link className="cyan-text lighten-2" to={`/repoProfile/${props.data.repo_id}`}>{props.data.repo_name}
+            <p className="left-align col s6">repo: <Link className="cyan-text lighten-2" to={`/repoProfile/${props.data.repo_id}`}>{props.data.repo_name}
             </Link></p>
             <p className="right-align col s6">{props.data.language}</p>
           </div>

@@ -40,8 +40,8 @@ class TicketList extends React.Component {
     return (
     <div>
       <TicketSearch searchHandler={this.getIssues} />
-      <h4>Beginner Tickets on Github</h4>
-      <blockquote>Labeled on Github as easy, beginner, good first bug, etc.
+      <h4>beginner tickets on github</h4>
+      <blockquote>labeled on github as easy, beginner, good first bug, etc.
       </blockquote>
       <div className="main-ticket-view">
           {this.state.ticketsToRender.map ((ticket, index) => 

@@ -25,7 +25,7 @@ var repoQueue = new QueueManager(60, 304);
 var baseGithubOptions = {
   json: true, //parses the responses body to automatically be js obj
   resolveWithFullResponse: true, //provides full reponse and not just body (so we get headers)
-  headers: { 'User-Agent': 'GitBegin App' }, 
+  headers: { 'User-Agent': 'GitBegin App' },
   qs: {client_id: config.githubClientId,
   client_secret: config.githubSecret}
 };
@@ -37,14 +37,14 @@ var getGithubIssuesByLabel = issueQueue.createQueuedFunction(function(label, get
   if (getAllPages === undefined) {
     getAllPages = true;
   }
-  
+
   var issues = [];
-  
+
   var options = {
     url: 'https://api.github.com/search/issues',
     qs: {per_page: 100,
     q: `is:issue is:open label:"${label}"`}
-  };  
+  };
   mergeObj(options, baseGithubOptions);
 
   return request.get(options).then((result) => {
@@ -56,7 +56,7 @@ var getGithubIssuesByLabel = issueQueue.createQueuedFunction(function(label, get
         return issues = issues.concat(results.reduce((memo, resObj) => {
           return memo.concat(resObj.items);
         }, []));
-      });  
+      });
     } else {
       return issues;
     }
@@ -68,10 +68,10 @@ var getGithubIssuesByLabel = issueQueue.createQueuedFunction(function(label, get
  * pages are retrieved
  */
 var getAllSubsequentPages = function(url) {
-  
+
   var data = [];
-  
-  var recursiveGet = function(url) { 
+
+  var recursiveGet = function(url) {
     var options = {
       url: url,
       json: true, //parses the responses body to automatically be js obj
@@ -105,7 +105,7 @@ var getRepoInformation = repoQueue.createQueuedFunction(function (orgName, repoN
     headers: {'If-None-Match': etag }
   };
   mergeObj(options, baseGithubOptions);
-  
+
   return request.get(options);
 });
 
@@ -115,7 +115,7 @@ var getRepoInformation = repoQueue.createQueuedFunction(function (orgName, repoN
 var convertIssueToDbIssue = function(obj) {
   //reduce down to properties we care about
   obj = pick(obj, ['id','title','comments','created_at', 'updated_at', 'html_url', 'assignee','repository_url','number', 'labels', 'body']);
-  
+
   //Assignee is either null or an object.  We want the username:
   if (obj.assignee) {
     obj.assignee = obj.assignee.login;
@@ -133,7 +133,7 @@ var convertIssueToDbIssue = function(obj) {
   if (typeof obj.body === 'string') {
     obj.body = obj.body.substring(0,1499);
   }
-   
+
   //Convert dates to JS dates so knex can reconvert back to mysql
   obj.created_at = dateFormat(obj.created_at, 'yyyy-mm-dd HH:MM:ss');
   obj.updated_at = dateFormat(obj.updated_at, 'yyyy-mm-dd HH:MM:ss');
@@ -142,39 +142,39 @@ var convertIssueToDbIssue = function(obj) {
   var repoPath = path.parse(obj.repository_url);
   obj.repo_name = repoPath.base;
   obj.org_name = path.parse(repoPath.dir).base;
-  
+
   //Delete keys we needed but that we don't want in our db;
-  delete obj.repository_url; 
-  
+  delete obj.repository_url;
+
   return obj;
 };
 
-/**Takes a Github API Repo object and converts it to an object 
+/**Takes a Github API Repo object and converts it to an object
  * that contains the columns we want to insert/update into our database.
  */
 var convertRepoToDbRepo = function(obj, headers) {
   //reduce down to properties we care about
-  obj = pick(obj, ['id','name','language','description','stargazers_count', 
+  obj = pick(obj, ['id','name','language','description','stargazers_count',
           'watchers_count', 'has_wiki', 'has_pages','open_issues','forks','created_at',
           'updated_at','pushed_at','html_url']);
-         
-  
+
+
   //Convert dates to JS dates so knex can reconvert back to mysql
   var mysqlDateFormat = 'yyyy-mm-dd HH:MM:ss';
   obj.created_at = dateFormat(obj.created_at, mysqlDateFormat);
   obj.updated_at = dateFormat(obj.updated_at, mysqlDateFormat);
   obj.pushed_at = dateFormat(obj.pushed_at, mysqlDateFormat);
   obj.data_refreshed_at = dateFormat(new Date(), mysqlDateFormat);
-  
+
   //Parse repo and org name out of URL
   var repoPath = path.parse(obj.html_url);
   obj.org_name = path.parse(repoPath.dir).base;
-  
+
   //Add header information if provided
   if (headers) {
-    obj.etag = headers.etag;  
+    obj.etag = headers.etag;
   }
-  
+
   return obj;
 };
 
@@ -204,7 +204,7 @@ var refreshReposFromGithub = function(repos) {
         //It determines this based on the etag we provide in the GET request
       } else {
         console.error('Error getting new repo information', result);
-      } 
+      }
     });
   });
 
