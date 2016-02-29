@@ -70,7 +70,7 @@ class RepoSearch extends React.Component {
     return <div className="row">
             <div className="input-field col s8">
               <input type="text" value={this.state.searchText} 
-                placeholder="Search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
+                placeholder="search here..." onChange={this.searchHandler} onKeyPress={this.searchHandler} />
             </div>
             <div className="input-field col s2">
               <select className={this.languageDropDownClass} value={this.state.currentLanguage} onChange={this.dummy}>
