@@ -52,7 +52,7 @@ Below is the folder structure we are using for the git workflow.
 We use the npm forever package and cron jobs to make sure the server always starts and stays running. Cron is also used to automate
 the background Git data collection.  These scripts are located at devops/starter.sh and devops/data-processor.sh. To set this up:
   1. Install the npm forever package using 'npm install -g forever'
-  2. Open cron w/ the command 'crontab -e'
+  2. Open cron w/ the command `crontab -e`
   3. Copy the cron configurations from devops/cronjobs.txt to your crontab config file.
   
 ###My stuff isn't working.
