@@ -22,7 +22,7 @@ class RepoList extends React.Component {
     var self = this;
     Repos.getRepos(function(data) {
       self.setState({
-        reposToRender: data.slice(0,199)
+        reposToRender: data.slice(0, 199)
       });
     }, console.log, searchTerm, language);
   }
