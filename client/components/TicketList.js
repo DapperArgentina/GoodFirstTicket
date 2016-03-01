@@ -21,6 +21,7 @@ class TicketList extends React.Component {
 
     Issues.getIssues(function(data) {
       self.setState({
+        numberOfTickets: data.length,
         ticketsToRender: data.slice(0,199)
       });
     }, console.log, searchTerm, language);
@@ -40,12 +41,13 @@ class TicketList extends React.Component {
     return (
     <div>
       <TicketSearch searchHandler={this.getIssues} />
-      <h4>beginner tickets on github</h4>
+      <h4>{this.state.numberOfTickets} beginner tickets on github</h4>
       <blockquote>labeled on github as easy, beginner, good first bug, etc.
       </blockquote>
       <div className="main-ticket-view">
-          {this.state.ticketsToRender.map ((ticket, index) => 
-            <TicketEntry data={ticket} key={index} />
+          {this.state.ticketsToRender.map ((ticket, index) => (
+              <TicketEntry data={ticket} key={index} />
+            )
           )}
       </div>
     </div>

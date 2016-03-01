@@ -12,7 +12,6 @@ class RepoEntry extends React.Component {
     };
   }
 
-
   onThumbsUp () {
     this.setState({
       thumbsUp: this.state.thumbsUp + 1
@@ -47,7 +46,7 @@ class RepoEntry extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <strong className="left-align col s3 cyan-text lighten-2">{this.props.data.org_name}</strong>
+                  <strong className="left-align col s3"><a className="cyan-text lighten-2" href={"http://www.github.com/" + this.props.data.org_name} target="_blank">{this.props.data.org_name}</a></strong>
                   <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.props.data.html_url} target="_blank">repo on github</a></strong>
                   <strong className="center col s3">{this.props.data.language || 'not specified'}</strong>
                   <div className="right-align col s3 mega-octicon octicon-thumbsdown"  onClick={ () => {this.onThumbsDown()} }>

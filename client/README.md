@@ -8,6 +8,10 @@ The init.js file is the root of our client side, the "entry" in the webpack.conf
 
 ##React Router##
 React Router refers to the specified path and renders that component when that specific path is referenced. The path names are somewhat arbitrary, but must match the path name where it is requested, although we decided to match path names to the component names. In our app, the requests are mostly from the NavBar component. The router establishes that the RepoList, RepoProfile, and ResourceList components are all siblings of each other and will occupy the same space within the App component.
+React Router API
+https://github.com/reactjs/react-router/blob/master/docs/API.md#routercontext
+npm react router docs
+https://www.npmjs.com/package/react-router-transition-context
 
 ##To Begin##
 To begin developing the client side, first run in your terminal 
