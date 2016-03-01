@@ -1,7 +1,7 @@
 
 #Server
 
-The backend is comprised of a few parts:    
+The backend is comprised of a few parts:
   - A web server which is responsible for serving static content and data via our REST API.  The entry point for this
   server is server/server.js.  We've used a cronjob and forever to make sure the server is always running on server startup
   and after crashes.  The folder server/devops contains information on setting this up.
@@ -12,7 +12,7 @@ The backend is comprised of a few parts:
   
 ## Requirements  
 
-- Node 5.6  
+- Node 5.6
 - MySQL 5.5
 
 ##Setup
@@ -23,15 +23,15 @@ First, you need to setup the mysql database.  Steps are:
   2. Open a mysql terminal and run the commands in server/db/setup.sql one by one.  This file contains the commands
   to create the database, create a user to interact w/ the db and create the tables necessary for the db.  MAKE SURE TO CHANGE
   THE PASSWORD IN THE 2ND COMMAND
-  3. Copy server/config.example.js and rename to config.js.  Fill in your database credentials.  
+  3. Copy server/config.example.js and rename to config.js.  Fill in your database credentials.
   4. Execute the following two files in order using node.  This will reach out to the Github API and populate
   your database w/ live data.  server/fetchIssuesRepos.js and server/refreshRepos.js.
   5. View the repos and issues tables and make sure you have data.
   
 ###Dev Environment
-After setting your database up, you're almost ready to start working, just run npm install to install dependencies. `npm run start`
+After setting your database up, you're almost ready to start working, just run `npm install` to install dependencies, `npm run start`
 will start the web server.   If you want to rerun the background data collection, you can either run the .js files manually
-as we did when setting up the database or run devops/data-processor.sh.  
+as we did when setting up the database or run devops/data-processor.sh.
 
 ###Prod Environment
 Below are instructions for setting up a production environment, where the web server is always running and the background jobs
@@ -39,13 +39,13 @@ run automatically.
   
 ####Pushing code to production server  
 Read the following link.  You'll want to use the file in /devops/post-receive for the post receive hook. It contains hooks to 
-automatically run webpack. Remeber that you'll need to copy any future changes to post-receive to /var/repo/gitbegin.git/hooks.  You could potentially
-symlink to the copy in devops.  
+automatically run webpack. Remember that you'll need to copy any future changes to post-receive to /var/repo/gitbegin.git/hooks.  You could potentially
+symlink to the copy in devops.
   
-https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps  
+https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps
 
 Below is the folder structure we are using for the git workflow.
-  - Source code folder - /var/www/gitbegin  
+  - Source code folder - /var/www/gitbegin
   - Git repo folder - /var/repo/gitbegin.git 
   
 ####Automating server startup and background jobs
