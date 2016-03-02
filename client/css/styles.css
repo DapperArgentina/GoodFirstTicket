@@ -6,3 +6,19 @@
    overflow: auto; 
    max-height: 100vh;
 }
+
+.new {
+  font-size: 18px;
+}
+.new span {
+  margin-left: -20px;
+}
+
+.new i {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.dropdown-button {
+  width: 170px;
+}

@@ -7,9 +7,9 @@ const TicketEntry = (props) => (
     <div className="col s12 m10">
       <div className="card white">
         <div className="card-content black-text" >
-          <span className="card-title activator"><a className="cyan-text lighten-2" href={props.data.html_url} target="_blank">{props.data.title}</a><i className="material-icons right">more_vert</i></span>
+          <span className="card-title activator"><a className="light-blue-text accent-1" href={props.data.html_url} target="_blank">{props.data.title}</a><i className="material-icons right">more_vert</i></span>
           <div className="row">
-            <div className="col sm 12">  
+            <div className="col s12 m12">  
               {props.data.labels.map(function(label, index) {
                 return (
                   <div className="chip" style={{'backgroundColor': '#' + label.color}} key={index}>

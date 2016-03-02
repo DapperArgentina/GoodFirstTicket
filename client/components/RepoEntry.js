@@ -31,7 +31,7 @@ class RepoEntry extends React.Component {
           <div className="card white">
             <div className="card-content black-text" >
                 <span className="card-title">
-                  <Link className="left cyan-text lighten-2" to={`/repoProfile/${this.props.data.id}`}>{this.props.data.name}
+                  <Link className="left  light-blue-text accent-1" to={`/repoProfile/${this.props.data.id}`}>{this.props.data.name}
                   </Link>
                 </span>
                 <div className="row">
