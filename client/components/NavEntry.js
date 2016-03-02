@@ -4,8 +4,8 @@ const Route = require('react-router').Route;
 const Link = require('react-router').Link;
 
 const NavEntry = (props) => (
-  <li>
-    <Link to={props.data.url}>{props.data.name}</Link>
+  <li className='indigo accent-2'>
+    <Link className='white-text' to={props.data.url}>{props.data.name}</Link>
   </li>
 );
 

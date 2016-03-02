@@ -16,20 +16,30 @@ const NavBar = class NavBar extends React.Component {
   render() {
     return (
       <div className="navbar-fixed">
-        <nav className="cyan lighten-2" role="navigation">
-          <div className="nav-wrapper container col s12 m4 l8"><a id="logo-container" href="#" className="brand-logo">good first ticket</a>
+        <nav className="indigo accent-2" role="navigation">
+        <a className='new dropdown-button left hide-on-med-and-down' data-beloworigin="true" href='#' data-activates='new'>{'New to Github?'}<i className="material-icons left">arrow_drop_down</i></a>
+          <ul id="new" className='dropdown-content'>
+          {this.props.linksLeft.map ((link, index) => 
+            <NavEntry data={link} key={index} />
+          )}
+          </ul>
+          <a id="logo-container" href="#" className="brand-logo center"><img src={'./rsz_b.png'} /></a>
             <ul className="right hide-on-med-and-down">
-              {this.props.links.map ((link, index) => 
+              {this.props.linksRight.map ((link, index) => 
                 <NavEntry data={link} key={index} />
               )}
+              <li className='Bounty deep-orange'><Link to={'/bounty'}>Add Bounty</Link></li>
             </ul>
             <ul id="nav-mobile" className="side-nav">
-              {this.props.links.map ((link, index) => 
+              {this.props.linksRight.map ((link, index) => 
+                <NavEntry data={link} key={index} />
+              )}
+              {this.props.linksLeft.map ((link, index) => 
                 <NavEntry data={link} key={index} />
               )}
             </ul>
             <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
-          </div>
+
         </nav>
       </div>
     );
