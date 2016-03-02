@@ -9,6 +9,13 @@ const TicketList = require('./components/TicketList');
 const RepoList = require('./components/RepoList'); 
 const RepoProfile = require('./components/RepoProfile'); 
 const ResourceList = require('./components/ResourceList');
+class Bounties extends React.Component {
+  render() {
+    return (
+        <TicketList bounties='true' />
+    );
+  }
+}
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -17,6 +24,7 @@ ReactDOM.render((
       <Route path='repos' component={RepoList} />
       <Route path='repoProfile/:repoId' component={RepoProfile} />
       <Route path='resources' component={ResourceList} />
+      <Route path='bounties' component={Bounties} />
     </Route>
   </Router>
 ), document.getElementById('app'));
