@@ -26,6 +26,7 @@ class Login extends React.Component {
     return (
       <div className="loginDiv">
         <h1>Login</h1>
+        <a href={"127.0.0.1:8080/gitHubRedirect"}>Login with github!</a>
         <form className="commentForm">
           <input
             type="text"
