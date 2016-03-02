@@ -25,7 +25,7 @@ First, you need to setup the mysql database.  Steps are:
   THE PASSWORD IN THE 2ND COMMAND
   3. Copy server/config.example.js and rename to config.js.  Fill in your database credentials.
   4. Execute the following two files in order using node.  This will reach out to the Github API and populate
-  your database w/ live data.  server/fetchIssuesRepos.js and server/refreshRepos.js.
+  your database w/ live data.  server/data-processor/fetchIssuesRepos.js and server/data-processor/refreshRepos.js.
   5. View the repos and issues tables and make sure you have data.
   
 ###Dev Environment
