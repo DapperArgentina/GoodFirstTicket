@@ -1,7 +1,10 @@
 const React = require('react');
-const NavBar = require('./NavBar'); 
- 
+const NavBar = require('./NavBar');
+
 const linksRight = [
+const NavBar = require('./NavBar');
+
+const linksList = [
   {
     name:"Login", url: '/login'
   },
@@ -27,14 +30,18 @@ const linksLeft = [
 
 
 const App = class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
       route: '/'
+      currentUser = {
+        loggedIn: false,
+        userName: ''
+      }
     };
   }
-  
+
   render () {
     return (
     <div className='app-shell grey lighten-2'>
