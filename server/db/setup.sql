@@ -26,43 +26,6 @@ CREATE TABLE issues ( /* beginner Issues */
   labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-/* 
-CREATE table bountyIssues
-  internal_id PRIMARY KEY
-  id (github ID)
-  id int NOT NULL,
-  number int,
-  repo_name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  org_name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
-  title varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  comments int,
-  created_at datetime,
-  updated_at datetime, 
-  html_url varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
-  assignee varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  body varchar(1500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-  bounty $ amount
-  bounty github user ID (user that creates the bounty)
-*/
-
-/*
-CREATE table issuesUsers (join table)
-  internal_id PRIMARY KEY
-  gitHub Issue ID
-  gitHub userID of person bounty hunter
-*/
-
-/*
-CREATE table users
-  internal_id PRIMARY KEY
-  gitHub User ID
-  gitHub username
-  
-  password
-  stripe auth
-*/
-
 CREATE TABLE repos ( /* beginner repos */
   internal_id int AUTO_INCREMENT PRIMARY KEY,
   id int,
@@ -87,5 +50,40 @@ CREATE TABLE repos ( /* beginner repos */
   subscribers_count int,
   network_count int
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE table bountyIssues (
+  internal_id int AUTO_INCREMENT PRIMARY KEY
+  id int NOT NULL,
+  number int,
+  repo_name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  org_name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
+  title varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  comments int,
+  created_at datetime,
+  updated_at datetime, 
+  html_url varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
+  assignee varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  body varchar(1500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  bountyAmount numeric(15,2),
+  bountyId int
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE table issuesUsers (
+  internal_id PRIMARY KEY
+  gitHub Issue ID
+  gitHub userID of person bounty hunter
+)
+
+
+/*
+CREATE table users
+  internal_id PRIMARY KEY
+  gitHub User ID
+  gitHub username
+  
+  password
+  stripe auth
+*/
 
 CREATE INDEX OrgRepo ON repos (name,org_name);
