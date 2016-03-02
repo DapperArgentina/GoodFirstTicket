@@ -1,6 +1,6 @@
 const React = require('react');
-const NavBar = require('./NavBar'); 
- 
+const NavBar = require('./NavBar');
+
 const linksRight = [
   {
     name:"Login", url: '/login'
@@ -27,18 +27,22 @@ const linksLeft = [
 
 
 const App = class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
-      route: '/'
+      route: '/',
+      currentUser: {
+        loggedIn: false,
+        userName: ''
+      }
     };
   }
-  
+
   render () {
     return (
     <div className='app-shell grey lighten-2'>
-      <NavBar linksRight={linksRight} linksLeft={linksLeft}/>
+      <NavBar loggedIn={this.state.currentUser.loggedIn} linksRight={linksRight} linksLeft={linksLeft}/>
       <div className="row">
         <div className="main col s12 container">
           {this.props.children}

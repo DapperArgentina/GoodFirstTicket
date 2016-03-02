@@ -3,7 +3,7 @@
   color: #3B5A91;
 }*/
 .main-ticket-view {
-   overflow: auto; 
+   overflow: auto;
    max-height: 100vh;
 }
 
