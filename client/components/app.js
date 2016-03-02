@@ -2,9 +2,6 @@ const React = require('react');
 const NavBar = require('./NavBar');
 
 const linksRight = [
-const NavBar = require('./NavBar');
-
-const linksList = [
   {
     name:"Login", url: '/login'
   },
