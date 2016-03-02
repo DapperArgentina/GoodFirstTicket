@@ -5,9 +5,9 @@ const ReactDOM = require('react-dom');
 const { Router, Route, Link, IndexRoute, hashHistory, RouterContext } = require('react-router');
 
 const App = require('./components/app');
-const TicketList = require('./components/TicketList'); 
-const RepoList = require('./components/RepoList'); 
-const RepoProfile = require('./components/RepoProfile'); 
+const TicketList = require('./components/TicketList');
+const RepoList = require('./components/RepoList');
+const RepoProfile = require('./components/RepoProfile');
 const ResourceList = require('./components/ResourceList');
 class Bounties extends React.Component {
   render() {
@@ -16,6 +16,8 @@ class Bounties extends React.Component {
     );
   }
 }
+const Login = require('./components/Login');
+const Signup = require('./components/Signup');
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -25,9 +27,8 @@ ReactDOM.render((
       <Route path='repoProfile/:repoId' component={RepoProfile} />
       <Route path='resources' component={ResourceList} />
       <Route path='bounties' component={Bounties} />
+      <Route path='login' component={Login} />
+      <Route path='signup' component={Signup} />
     </Route>
   </Router>
 ), document.getElementById('app'));
-
-
-

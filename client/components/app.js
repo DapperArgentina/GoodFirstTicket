@@ -34,8 +34,8 @@ const App = class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: '/'
-      currentUser = {
+      route: '/',
+      currentUser: {
         loggedIn: false,
         userName: ''
       }
@@ -45,7 +45,7 @@ const App = class App extends React.Component {
   render () {
     return (
     <div className='app-shell grey lighten-2'>
-      <NavBar linksRight={linksRight} linksLeft={linksLeft}/>
+      <NavBar loggedIn={this.state.currentUser.loggedIn} linksRight={linksRight} linksLeft={linksLeft}/>
       <div className="row">
         <div className="main col s12 container">
           {this.props.children}
