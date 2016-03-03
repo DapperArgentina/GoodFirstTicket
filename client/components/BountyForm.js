@@ -23,6 +23,21 @@ class BountyForm extends React.Component {
     e.preventDefault();
     Stripe.createToken(this.state.card, function (status, response) {
       console.log( status, response );
+      var token = response.id;
+      //send the token to the server
+      $.ajax({
+        url: '/stripe',
+        dataType: 'json',
+        type: 'POST',
+        data: {stripeToken: token},
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(xhr, status, err) {
+          console.error('/stripe', status, err.toString());
+        }
+      });
+
     });
   }
 
@@ -30,13 +45,19 @@ class BountyForm extends React.Component {
     let card = this.state.card;
     card[e.target.name] = e.target.value;
     this.setState(card);
+    console.log(this.state);
   }
 
   render() {
     return (
       <div className="bountyFormDiv">
-        <h1>Post a Bounty</h1>
-        <form onSubmit={ this.handleSubmit.bind(this) }>
+        <h2>Post a Bounty</h2>
+        <h3>Describe Your Bounty</h3>
+        <h3>Enter Payment Information</h3> 
+        <p>Note: You will not be charged until you approve and merge a pull request from a bounty hunter.</p>
+        <p>Github Bounties will never store your credit card information. </p>
+
+        <form onSubmit={ this.handleSubmit.bind(this) } >
           <div class="form-row">
             <label>
             <span>Card Number</span>
