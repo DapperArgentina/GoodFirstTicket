@@ -5,7 +5,7 @@ const Link = require('react-router').Link;
 
 const NavEntry = (props) => {
   var url = '';
-  if (props.data.name === 'Bounties') {
+  if (props.data.name !== 'Profile') {
     url = props.data.url;
   } else {
     url = props.loggedIn ? props.data.url : '/login';
@@ -16,6 +16,6 @@ const NavEntry = (props) => {
       <Link className='white-text' to={url}>{props.data.name}</Link>
     </li>
   );
-}
+};
 
 module.exports = NavEntry;
