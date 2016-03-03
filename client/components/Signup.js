@@ -32,7 +32,7 @@ class Signup extends React.Component {
   }
 
   render() {
-    var error = this.state.error ? <p className="error"> Passwords don't match. Try again. </p> : null;
+    var error = this.state.error ? <p className="error"> {"Passwords don't match. Try again."} </p> : null;
     return (
       <div className="row loginDiv">
         <div className="col s4 offset-m4">

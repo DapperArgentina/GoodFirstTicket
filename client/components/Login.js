@@ -41,7 +41,7 @@ class Login extends React.Component {
               </div>
               <button type="submit" className="waves-effect waves-light btn" onClick={this.handleSubmit.bind(this)}>Sign In</button> <a href={"http://127.0.0.1:3000/gitHubRedirect"} className='btn git indigo accent-2'><img src={'./github.png'} /></a>
             </form>
-            <a href="#/signup">Don't have an account? <strong>Sign up!</strong></a>
+            <a href="#/signup">{"Don't have an account?"} <strong>Sign up!</strong></a>
           </div>
         </div>
       </div>
