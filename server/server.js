@@ -86,7 +86,6 @@ app.route('/stripe')
     var stripeToken = req.body.stripeToken;
     stripe.customers.create({
       source: stripeToken,
-      description: 'payinguser@example.com'
     }).then((customer) => {
       Users.saveId(customer.id, userId) // need to pass currently logged in userID here
       .then(() => {
