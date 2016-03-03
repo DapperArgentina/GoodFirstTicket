@@ -1,8 +1,7 @@
-#Note these jobs are written assuming the prod app location (ie /var/www/gitbeing)
+#Note these jobs are written assuming the prod app location (ie /var/www/gitbegin)
 
 #This one sets up starter.sh to run on reboot.  This starts our web server
 @reboot /var/www/gitbegin/server/devops/starter.sh >> /var/www/gitbegin/server/logs/cron.log 2>&1
 
 #These configure our batch jobs to run every hour
 0 * * * * /var/www/gitbegin/server/devops/data-processor.sh >> /var/www/gitbegin/server/logs/data-processor.log 2>&1
-

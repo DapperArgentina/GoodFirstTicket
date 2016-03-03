@@ -16,14 +16,14 @@ class RepoList extends React.Component {
     
   }
   
-  getRepos(searchTerm, language){
+  getRepos(searchTerm, language) {
     //Fetch repos;
     //refactor to exclude 'self/this' with es6 syntax?
     var self = this;
     Repos.getRepos(function(data) {
       self.setState({
         numberOfRepos: data.length,
-        reposToRender: data.slice(0,199)
+        reposToRender: data.slice(0, 199)
       });
     }, console.log, searchTerm, language);
   }

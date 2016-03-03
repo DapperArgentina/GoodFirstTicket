@@ -1,8 +1,33 @@
-/*body {
-  background-color: #DFDAC8;
-  color: #3B5A91;
-}*/
 .main-ticket-view {
-   overflow: auto; 
+   overflow: auto;
    max-height: 100vh;
+}
+
+.new {
+  font-size: 18px;
+}
+.new span {
+  margin-left: -20px;
+}
+
+.new i {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.dropdown-button {
+  width: 170px;
+}
+
+.loginDiv input{
+  width: 250px;
+  padding: 10px;
+}
+
+.git {
+  margin-left: 15px;
+}
+.git img {
+  margin-top: 5px;
+  width: 24px;
 }

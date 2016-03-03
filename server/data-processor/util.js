@@ -132,6 +132,10 @@ var convertIssueToDbIssue = function(obj) {
   //Limit body value to 1500 characters
   if (typeof obj.body === 'string') {
     obj.body = obj.body.substring(0,1499);
+    obj.body = obj.body.replace(/[^\x00-\x7F]/g, "");
+  } else {
+    console.log('type: ', typeof obj.body);
+    console.log('obj.body: ', obj.body);
   }
 
   //Convert dates to JS dates so knex can reconvert back to mysql

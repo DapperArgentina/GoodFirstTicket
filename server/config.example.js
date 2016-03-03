@@ -4,8 +4,8 @@ var config = {
   dbUser: '',
   dbPassword: '',
   dbName: '',
-  githubClientId: '',
-  githubSecret: '',
+  GITHUB_CLIENT: '',
+  GITHUB_SECRET: '',
 };
 
 module.exports = config;

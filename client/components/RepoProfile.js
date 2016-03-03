@@ -62,7 +62,7 @@ class RepoProfile extends React.Component {
                   <strong className="left-align col s3"><span className="octicon octicon-history"></span> updated <TimeAgo date={this.state.repoToRender.updated_at} /></strong>
                   <strong className="center col s3"><span className="octicon octicon-issue-opened"></span> beginner tickets {this.state.repoToRender.beginner_tickets}</strong>
                   <strong className="center col s3"><span className="octicon octicon-git-branch"></span> forks {this.state.repoToRender.forks}</strong>
-                  <div className="right-align col s3 mega-octicon octicon-thumbsup" onClick={ () => {this.onThumbsUp()} }>
+                  <div className="right-align col s3 mega-octicon octicon-thumbsup" onClick={ () => { this.onThumbsUp(); } }>
                     <span className="green-text lighten-2"> {this.state.thumbsUp}</span>
                   </div>
                 </div>
@@ -70,14 +70,14 @@ class RepoProfile extends React.Component {
                   <strong className="left-align col s3"><span className="octicon octicon-calendar"></span> created <TimeAgo date={this.state.repoToRender.created_at} /></strong>
                   <strong className="center col s3"><span className="octicon octicon-git-pull-request"></span> last push <TimeAgo date={this.state.repoToRender.pushed_at} /></strong>
                   <strong className="center col s3"><span className="octicon octicon-eye"></span> watchers {this.state.repoToRender.watchers_count}</strong>
-                  <div className="right-align col s3 mega-octicon octicon-thumbsdown"  onClick={ () => {this.onThumbsDown()} }>
+                  <div className="right-align col s3 mega-octicon octicon-thumbsdown" onClick={ () => { this.onThumbsDown(); } }>
                     <span className="red-text lighten-2"> {this.state.thumbsDown}</span>
                   </div>
                 </div>
                 <div className="row">
-                  <strong className="left-align col s3"><a className="cyan-text lighten-2" href={"http://www.github.com/" + this.state.repoToRender.org_name} target="_blank">{this.state.repoToRender.org_name}</a></strong>
+                  <strong className="left-align col s3"><a className="cyan-text lighten-2" href={'http://www.github.com/' + this.state.repoToRender.org_name} target="_blank">{this.state.repoToRender.org_name}</a></strong>
                   <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repoToRender.html_url} target="_blank">repo on github</a></strong>
-                  <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repoToRender.html_url+"/wiki"} target="_blank">wiki</a></strong>
+                  <strong className="center col s3" ><a className="cyan-text lighten-2" href={this.state.repoToRender.html_url + '/wiki'} target="_blank">wiki</a></strong>
                   <strong className="right-align col s3">{this.state.repoToRender.language || 'not specified'}</strong>
               </div>
                 <div className="row">
