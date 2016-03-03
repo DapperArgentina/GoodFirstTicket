@@ -73,25 +73,6 @@ CREATE table bountyIssues (
   html_url varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
   assignee varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   body varchar(1500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-  bountyAmount numeric(15,2),
-  bountyId int
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-CREATE table issuesUsers (
-  internal_id int AUTO_INCREMENT PRIMARY KEY
-  gitHub Issue ID
-  gitHub userID of person bounty hunter
-)
-
-CREATE table users (
-  internal_id int AUTO_INCREMENT PRIMARY KEY,
-  github_id int NOT NULL,
-  github_username varchar(50),
-  password varchar(50),
-  stripe_cust_id varchar(40)
-)
-=======
   labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   bountyAmount int,
   bounty_user_id int,
@@ -105,6 +86,5 @@ CREATE table issuesUsers (
   FOREIGN KEY (user_id) REFERENCES users(internal_id),
   FOREIGN KEY (issue_id) REFERENCES bountyIssues(internal_id)
 );
->>>>>>> Add User to DB on sign up. Update config.example syntax. Update package.json for Stripe req's. Update SQL tables schema.
 
 CREATE INDEX OrgRepo ON repos (name,org_name);

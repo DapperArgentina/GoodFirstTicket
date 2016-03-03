@@ -79,6 +79,7 @@ githubOAuth.on('token', function(token, serverResponse) {
     console.log(body);
     Users.createUser(body)
     .then(() => {
+      Users.createUser(body);
       console.log('Saved new user');
     })
     .catch(() => {
@@ -95,7 +96,7 @@ app.route('/stripe')
     stripe.customers.create({
       source: stripeToken,
     }).then((customer) => {
-      Users.saveId(customer.id, userId) // need to pass currently logged in userID here
+      Users.saveId(customer.id, 3) // need to pass currently logged in userID here
       .then(() => {
         console.log('saved customer ID to DB');
       })
