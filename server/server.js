@@ -11,11 +11,18 @@ var githubOAuth = require('github-oauth')({
 var github = require('octonode');
 
 console.log('starting server ')
+
+var stripe = require("stripe")("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+var mysql = require('mysql');
+
 var Issues = require('./models/issues');
 Issues = new Issues();
 
 var Repos = require('./models/repos');
 Repos = new Repos();
+
+var Users = require('./models/users');
+Users = new Users();
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
@@ -69,11 +76,36 @@ githubOAuth.on('error', function(err) {
 // use token to get the user id
 githubOAuth.on('token', function(token, serverResponse) {
   github.client(token.access_token).get('/user', {}, function (err, status, body, headers) {
-  console.log(body);
-
-});
+    console.log(body);
+    Users.createUser(body)
+    .then(() => {
+      Users.createUser(body);
+      console.log('Saved new user');
+    })
+    .catch(() => {
+      res.statusCode = 501;
+      res.send('Unknown Server Error');
+    });
+  });
   serverResponse.end(JSON.stringify(token))
 })
+
+app.route('/stripe')
+  .post(function(req, res){
+    var stripeToken = req.body.stripeToken;
+    stripe.customers.create({
+      source: stripeToken,
+    }).then((customer) => {
+      Users.saveId(customer.id, 3) // need to pass currently logged in userID here
+      .then(() => {
+        console.log('saved customer ID to DB');
+      })
+      .catch(() => {
+        res.statusCode = 501;
+        res.send('Unknown Server Error');
+      })
+    })
+  })
 
 console.log(`server running on port ${port} in ${process.env.NODE_ENV} mode`);
 // start listening to requests on port 3000

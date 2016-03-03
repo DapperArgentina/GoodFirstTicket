@@ -54,6 +54,7 @@
     "react-router": "^2.0.0",
     "react-timeago": "^2.2.1",
     "request-promise": "^2.0.1",
+    "stripe": "^4.4.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   },

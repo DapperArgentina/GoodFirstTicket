@@ -26,7 +26,7 @@ class BountyForm extends React.Component {
       var token = response.id;
       //send the token to the server
       $.ajax({
-        url: '/stripe',
+        url: 'http://127.0.0.1:3000/stripe',
         dataType: 'json',
         type: 'POST',
         data: {stripeToken: token},
