@@ -70,20 +70,17 @@ CREATE table bountyIssues (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE table issuesUsers (
-  internal_id PRIMARY KEY
+  internal_id int AUTO_INCREMENT PRIMARY KEY
   gitHub Issue ID
   gitHub userID of person bounty hunter
 )
 
-
-/*
-CREATE table users
-  internal_id PRIMARY KEY
-  gitHub User ID
-  gitHub username
-  
-  password
-  stripe auth
-*/
+CREATE table users (
+  internal_id int AUTO_INCREMENT PRIMARY KEY,
+  github_id int NOT NULL,
+  github_username varchar(50),
+  password varchar(50),
+  stripe_cust_id varchar(40)
+)
 
 CREATE INDEX OrgRepo ON repos (name,org_name);
