@@ -77,6 +77,14 @@ githubOAuth.on('error', function(err) {
 githubOAuth.on('token', function(token, serverResponse) {
   github.client(token.access_token).get('/user', {}, function (err, status, body, headers) {
     console.log(body);
+    Users.createUser(body)
+    .then(() => {
+      console.log('Saved new user');
+    })
+    .catch(() => {
+      res.statusCode = 501;
+      res.send('Unknown Server Error');
+    });
   });
   serverResponse.end(JSON.stringify(token))
 })

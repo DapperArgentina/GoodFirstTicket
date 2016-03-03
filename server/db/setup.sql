@@ -51,8 +51,17 @@ CREATE TABLE repos ( /* beginner repos */
   network_count int
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+CREATE table users (
+  internal_id int AUTO_INCREMENT PRIMARY KEY,
+  github_id int NOT NULL,
+  github_login varchar(50),
+  github_name varchar(50),
+  github_email varchar(50),
+  stripe_cust_id varchar(40)
+);
+
 CREATE table bountyIssues (
-  internal_id int AUTO_INCREMENT PRIMARY KEY
+  internal_id int AUTO_INCREMENT PRIMARY KEY,
   id int NOT NULL,
   number int,
   repo_name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -82,5 +91,20 @@ CREATE table users (
   password varchar(50),
   stripe_cust_id varchar(40)
 )
+=======
+  labels varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  bountyAmount int,
+  bounty_user_id int,
+  FOREIGN KEY (bounty_user_id) REFERENCES users(internal_id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE table issuesUsers (
+  internal_id int AUTO_INCREMENT PRIMARY KEY,
+  issue_id int NOT NULL,
+  user_id int NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(internal_id),
+  FOREIGN KEY (issue_id) REFERENCES bountyIssues(internal_id)
+);
+>>>>>>> Add User to DB on sign up. Update config.example syntax. Update package.json for Stripe req's. Update SQL tables schema.
 
 CREATE INDEX OrgRepo ON repos (name,org_name);
