@@ -6,40 +6,44 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-
+      error: false
     };
   }
 
   handleSubmit() {
-    console.log(this)
-    this.props.addNewUser(this.state.id, this.state.name, this.state.email, this.props.fetchAllUsers)
+    this.setState({
+      error: false
+    });
+// On submit api call to server if 500 setState error true
   }
 
   handleUsernameChange(e) {
-   this.setState({id: e.target.value});
+    this.setState({id: e.target.value});
   }
   handlePasswordChange(e) {
-   this.setState({name: e.target.value});
+    this.setState({name: e.target.value});
   }
 
   render() {
+    var error = this.state.error ? <p className="error"> Invalid information. Try again. </p> : null;
     return (
-      <div className="loginDiv">
-        <h1>Login</h1>
-        <a href={"127.0.0.1:8080/gitHubRedirect"}>Login with github!</a>
-        <form className="commentForm">
-          <input
-            type="text"
-            placeholder="username"
-            onChange={this.handleUsernameChange.bind(this)}
-          />
-          <input
-            type="text"
-            placeholder="password"
-            onChange={this.handlePasswordChange.bind(this)}
-          />
-          <button type="button" onClick={this.handleSubmit.bind(this)}>Submit new user</button>
-        </form>
+      <div className="row row-centered loginDiv">
+        <div className="col s4 offset-s4 col-centered">
+          <div id='signin'>
+            <h2>Login</h2>
+            <form name="userForm" noValidate>
+              <div className="form-group">
+                <input type='text' placeholder="Username" name='username' className='form-control, validate' required onChange={this.handleUsernameChange.bind(this)}/>
+                {error}
+              </div>
+              <div className="form-group">
+                <input type="password" placeholder="Password" name='password' className="form-control" required onChange={this.handlePasswordChange.bind(this)}/>
+              </div>
+              <button type="submit" className="waves-effect waves-light btn" onClick={this.handleSubmit.bind(this)}>Sign In</button> <a href={"http://127.0.0.1:3000/gitHubRedirect"} className='btn git indigo accent-2'><img src={'./github.png'} /></a>
+            </form>
+            <a href="#/signup">{"Don't have an account?"} <strong>Sign up!</strong></a>
+          </div>
+        </div>
       </div>
     );
   }

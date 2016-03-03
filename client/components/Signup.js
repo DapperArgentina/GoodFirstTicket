@@ -6,47 +6,55 @@ class Signup extends React.Component {
     super(props);
 
     this.state = {
-
+      error: false,
+      username: '',
+      password: '',
+      confirmedPassword: ''
     };
   }
 
   handleSubmit() {
-    console.log(this)
-    this.props.addNewUser(this.state.id, this.state.name, this.state.email, this.props.fetchAllUsers)
+    this.setState({
+      error: false
+    });
+    // check if passwords match
+// On submit api call to server if 500 setState error true
   }
 
   handleUsernameChange(e) {
-   this.setState({id: e.target.value});
+    this.setState({username: e.target.value});
   }
   handlePasswordChange(e) {
-   this.setState({name: e.target.value});
+    this.setState({password: e.target.value});
   }
-  handleConfirmPwdChange(e) {
-   this.setState({email: e.target.value});
+  handleConfirmedPasswordChange(e) {
+    this.setState({confirmedPassword: e.target.value});
   }
 
   render() {
+    var error = this.state.error ? <p className="error"> {"Passwords don't match. Try again."} </p> : null;
     return (
-      <div className="signupDiv">
-        <h1>Signup</h1>
-        <form className="commentForm">
-          <input
-            type="text"
-            placeholder="username"
-            onChange={this.handleUsernameChange.bind(this)}
-          />
-          <input
-            type="text"
-            placeholder="password"
-            onChange={this.handlePasswordChange.bind(this)}
-          />
-          <input
-            type="text"
-            placeholder="confirm password"
-            onChange={this.handleConfirmPwdChange.bind(this)}
-          />
-          <button type="button" onClick={this.handleSubmit.bind(this)}>Submit new user</button>
-        </form>
+      <div className="row loginDiv">
+        <div className="col s4 offset-m4">
+          <div id='signin'>
+            <h2>Signup</h2>
+            <form name="userForm" noValidate>
+              <div className="form-group">
+                <input type='text' placeholder="Username" name='username' className='form-control, validate' required onChange={this.handleUsernameChange.bind(this)}/>
+
+              </div>
+              <div className="form-group">
+                <input type="password" placeholder="Password" name='password' className="form-control, validate" required onChange={this.handlePasswordChange.bind(this)}/>
+              </div>
+              <div className="form-group">
+                <input type="password" placeholder="Re-enter password" name='confirmPassword' className="form-control, validate" required onChange={this.handleConfirmedPasswordChange.bind(this)}/>
+              </div>
+              {error}
+              <button type="submit" className="waves-effect waves-light btn" onClick={this.handleSubmit.bind(this)}>Sign Up</button>
+            </form>
+            <a href="#/login">Already have an account? <strong>Sign in!</strong></a>
+          </div>
+        </div>
       </div>
     );
   }

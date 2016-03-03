@@ -29,14 +29,14 @@ class TicketList extends React.Component {
     }, console.log, searchTerm, language);
   }
 
-  getBounties(searchTerm, language){
+  getBounties(searchTerm, language) {
     //Fetch issues;
     var self = this;
 
     Issues.getBounties(function(data) {
       self.setState({
         numberOfTickets: data.length,
-        ticketsToRender: data.slice(0,199)
+        ticketsToRender: data.slice(0, 199)
       });
     }, console.log, searchTerm, language);
   }
